@@ -21,6 +21,7 @@ public class RegisterFile {
 	public Register readRegister(int index) {
 		return registers[index];
 	}
+
 	public int readRegisterValue(int index) {
 		return registers[index].getValue();
 	}
