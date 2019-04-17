@@ -2,12 +2,12 @@ package memory;
 
 public class InstructionMemory {
 
-	int[] instructions;
+	public static int[] instructions=new int[4096];
 	int numberOfInstructions;
 
-	public InstructionMemory(int size) {
-		instructions = new int[size];
-	}
+//	public InstructionMemory(int size) {
+//		instructions = new int[size];
+//	}
 
 	public void setInstruction(int i, int value) {
 		instructions[i / 2] = value;
