@@ -36,4 +36,29 @@ public class RegisterFile {
 			r += registers[i].toString() + "\n";
 		return r;
 	}
+
+	public void initialize() {
+		Register[] registers = new Register[16];
+		for (int i = 0; i < registers.length; i++) {
+			registers[i] = new Register(16);
+		}
+		registers[0].setName("$zero");
+		registers[1].setName("$one");
+		registers[2].setName("$sp");
+		registers[3].setName("$ra");
+		registers[4].setName("$s0");
+		registers[5].setName("$s1");
+		registers[6].setName("$s2");
+		registers[7].setName("$s3");
+		registers[8].setName("$t0");
+		registers[9].setName("$t1");
+		registers[10].setName("$t2");
+		registers[11].setName("$t3");
+		registers[12].setName("$a0");
+		registers[13].setName("$a1");
+		registers[14].setName("$a2");
+		registers[15].setName("$v0");
+		setRegisters(registers);
+
+	}
 }

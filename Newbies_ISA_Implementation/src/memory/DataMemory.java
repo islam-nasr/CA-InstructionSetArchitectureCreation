@@ -1,12 +1,9 @@
 package memory;
 
 public class DataMemory {
-	private int[] data;
+	public static int[] data = new int[61440]; //2^16 - 2^12;
 	// private int maximumUsedAddress = -1;
 
-	public DataMemory(int size) {
-		data = new int[size];
-	}
 
 	public void write(int address, int value) {
 		// maximumUsedAddress = Math.max(maximumUsedAddress, address/4);
