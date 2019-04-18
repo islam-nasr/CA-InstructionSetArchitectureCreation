@@ -7,6 +7,9 @@ public class InstructionIntialization {
 	public static HashMap<String, Integer> bitStrings = new HashMap<String, Integer>();
 	public static HashMap<String, String> StringType = new HashMap<String, String>();
 
+	/**
+	 * initializes all the instructions defined in our ISA
+	 */
 	public static void initialize() {
 		String init = "RDI";
 		int initBits = 0;
@@ -50,7 +53,7 @@ public class InstructionIntialization {
 		bitStrings.put(init, initBits);
 		init = "HAT";
 		initBits++;
-		StringType.put(init, "R");
+		StringType.put(init, "J");
 		bitStrings.put(init, initBits);
 		init = "SMN";
 		initBits++;

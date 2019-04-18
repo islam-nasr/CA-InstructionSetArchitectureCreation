@@ -1,4 +1,5 @@
 package alu;
+
 import java.util.BitSet;
 
 public class ALU_Controller {
@@ -27,7 +28,12 @@ public class ALU_Controller {
 
 	// Shiftleftlogical:
 	// SLL opcode 1110 using 2 ALU inputs
-
+	/***
+	 * 
+	 * @param Opcode
+	 *            to check the code entering to determine which operation to use
+	 * @return operation code to go to the ALU
+	 */
 	public static BitSet alucontrol(BitSet Opcode) {
 		String OpcodeString = getBits(Opcode);
 		switch (OpcodeString) {
@@ -73,16 +79,11 @@ public class ALU_Controller {
 		return r;
 	}
 
-/*	public static void main(String[] args) {
-		BitSet x = new BitSet(4);
-		x.set(0);
-		x.set(2);
-		x.set(3);
-		for (int i = 0; i < x.length(); i++) {
-			System.out.println(x.get(i));
-		}
-		System.out.println(x.toString());
-		System.out.println(getBits(x));
-	}*/
+	/*
+	 * public static void main(String[] args) { BitSet x = new BitSet(4); x.set(0);
+	 * x.set(2); x.set(3); for (int i = 0; i < x.length(); i++) {
+	 * System.out.println(x.get(i)); } System.out.println(x.toString());
+	 * System.out.println(getBits(x)); }
+	 */
 
 }

@@ -4,6 +4,17 @@ import java.util.BitSet;
 
 public class ALU {
 
+	@SuppressWarnings("unused")
+	/***
+	 * 
+	 * @param Opcode
+	 *            value entering the ALU to determine which operator to use
+	 * @param value1
+	 *            first operand
+	 * @param value2
+	 *            second operand
+	 * @return result of the operation
+	 */
 	public static int Operation(BitSet Opcode, int value1, int value2) {
 		String OpcodeString = ALU_Controller.getBits(Opcode);
 		int result;

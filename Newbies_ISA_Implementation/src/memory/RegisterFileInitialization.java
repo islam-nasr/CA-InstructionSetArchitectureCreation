@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class RegisterFileInitialization {
 	public static HashMap<String, Integer> regStrings = new HashMap<String, Integer>();
-	
+
 	public static void initialize() {
 		String name = "$zero";
 		regStrings.put(name, 0);
@@ -35,7 +35,7 @@ public class RegisterFileInitialization {
 
 		name = "$t1";
 		regStrings.put(name, 9);
-		
+
 		name = "$t2";
 		regStrings.put(name, 10);
 

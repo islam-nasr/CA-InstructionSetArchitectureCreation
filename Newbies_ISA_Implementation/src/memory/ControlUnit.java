@@ -6,6 +6,7 @@ import alu.ALU_Controller;
 
 public class ControlUnit {
 
+	@SuppressWarnings("unused")
 	public static void getControlSignals(BitSet opcode) {
 		String OpcodeString = ALU_Controller.getBits(opcode);
 

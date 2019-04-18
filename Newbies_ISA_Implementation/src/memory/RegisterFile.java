@@ -10,22 +10,55 @@ public class RegisterFile {
 		}
 	}
 
+	/**
+	 * getting the complete registers in the system
+	 * 
+	 * @return array of registers
+	 */
 	public Register[] getRegisters() {
 		return registers;
 	}
 
+	/**
+	 * sets the registers to given register array
+	 * 
+	 * @param registers
+	 *            new array containing the registers
+	 */
 	public void setRegisters(Register[] registers) {
 		this.registers = registers;
 	}
 
+	/**
+	 * reads complete register from the registers array
+	 * 
+	 * @param index
+	 *            the register number to return
+	 * @return the register
+	 */
 	public Register readRegister(int index) {
 		return registers[index];
 	}
 
+	/**
+	 * reads a value from a register
+	 * 
+	 * @param index
+	 *            the register number to read that value at
+	 * @return the value in the register
+	 */
 	public int readRegisterValue(int index) {
 		return registers[index].getValue();
 	}
 
+	/**
+	 * writes a value into a register
+	 * 
+	 * @param index
+	 *            the register number to write that value at
+	 * @param value
+	 *            the value being written in the register
+	 */
 	public void writeRegister(int index, int value) {
 		registers[index].setValue(value);
 	}
@@ -37,6 +70,9 @@ public class RegisterFile {
 		return r;
 	}
 
+	/**
+	 * initializes all the registers defined in our ISA
+	 */
 	public void initialize() {
 		Register[] registers = new Register[16];
 		for (int i = 0; i < registers.length; i++) {
