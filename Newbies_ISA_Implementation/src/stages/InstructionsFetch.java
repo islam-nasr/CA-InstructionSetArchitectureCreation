@@ -95,7 +95,22 @@ public class InstructionsFetch {
 
 		return instruction;
 	}
-
+	
+	/***
+	 * takes i and returns the element in position i in instruction memory
+	 * 
+	 * @param i
+	 *            position to access now
+	 * @return String representing the instruction
+	 **
+	 */
+public static String fetchInstruction(int i) {
+	String x = Integer.toBinaryString(InstructionMemory.getInstruction(i * 2));
+	while (x.length() < 16) {
+		x = "0" + x;
+	}
+	return x;
+}
 	public static void main(String[] args) {
 		String x = "0011";
 		int y = Integer.parseInt(x, 2) << 12;

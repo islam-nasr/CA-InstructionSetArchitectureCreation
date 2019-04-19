@@ -21,11 +21,7 @@ public class testingfetching {
 		}
 
 		for (int i = 0; i < InstructionMemory.numberOfInstructions; i++) {
-			String x = Integer.toBinaryString(InstructionMemory.getInstruction(i * 2));
-			while (x.length() < 16) {
-				x = "0" + x;
-			}
-			System.out.println(x);
+			System.out.println(InstructionsFetch.fetchInstruction(i));
 		}
 	}
 }
