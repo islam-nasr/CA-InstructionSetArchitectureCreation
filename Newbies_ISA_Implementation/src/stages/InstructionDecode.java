@@ -26,6 +26,7 @@ public class InstructionDecode extends Stage {
 	}
 
 	public void execute() {
+		System.out.println("Executing decoding....");
 		String readRegister2 = instruction.substring(instruction.length() - 4, instruction.length());
 		String readRegister1 = instruction.substring(instruction.length() - 8, instruction.length() - 4);
 		String rD = instruction.substring(instruction.length() - 12, instruction.length() - 8);

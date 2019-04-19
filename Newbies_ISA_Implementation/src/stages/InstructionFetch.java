@@ -24,6 +24,7 @@ public class InstructionFetch extends Stage {
 	 **
 	 */
 	public String execute(int i) {
+		System.out.println("Executing fetching........");
 		String instruction = Integer.toBinaryString(InstructionMemory.getInstruction(i * 2));
 		while (instruction.length() < 16) {
 			instruction = "0" + instruction;
