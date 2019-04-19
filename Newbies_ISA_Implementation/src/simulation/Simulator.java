@@ -28,12 +28,13 @@ public class Simulator {
 			System.out.println("mesh la2y om el file");
 		}
 		
-		
+		int clockcycles=1;
 		for(int pc=0;pc<InstructionMemory.numberOfInstructions;pc++) {
-			System.out.println("____________________");
+			System.out.println("____________________"+'\n'+"Clockcycle: "+clockcycles);
 			Stage s = new InstructionFetch();
 			processes.add(s);
 			ControlUnit control = new ControlUnit();
+			clockcycles++;
 			// for loop over all current processes
 			for (int i = 0; i < processes.size(); i++) {
 				// get the process at this index
@@ -86,7 +87,8 @@ public class Simulator {
 			}
 		if(pc==InstructionMemory.numberOfInstructions-1) {
 			while(!processes.isEmpty()) {
-				System.out.println("____________________");
+				clockcycles++;
+				System.out.println("____________________"+'\n'+"Clockcycle: "+clockcycles);
 
 			
 			for (int i = 0; i < processes.size(); i++) {
