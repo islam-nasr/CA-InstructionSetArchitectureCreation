@@ -1,6 +1,5 @@
 package alu;
 
-import java.util.BitSet;
 
 public class ALU {
 
@@ -15,13 +14,12 @@ public class ALU {
 	 *            second operand
 	 * @return result of the operation
 	 */
-	public static int Operation(BitSet Opcode, int value1, int value2) {
-		String OpcodeString = ALU_Controller.getBits(Opcode);
+	public static int Operation(String Opcode, int value1, int value2) {
 		int result;
 		boolean isALU = true;
 		boolean isEqual = false;
 		boolean lastbit = false;
-		switch (OpcodeString) {
+		switch (Opcode) {
 		case "000":
 			result = value1 + value2;
 			break;// call add method

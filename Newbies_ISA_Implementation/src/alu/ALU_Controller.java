@@ -34,29 +34,28 @@ public class ALU_Controller {
 	 *            to check the code entering to determine which operation to use
 	 * @return operation code to go to the ALU
 	 */
-	public static BitSet alucontrol(BitSet Opcode) {
-		String OpcodeString = getBits(Opcode);
-		switch (OpcodeString) {
+	public static String alucontrol(String Opcode) {
+		switch (Opcode) {
 		case "0001":
 		case "0010":
 		case "0011":
-			return toBits("000");// ADD OPCODE
+			return "000";// ADD OPCODE
 		case "0100":
 		case "1011":
 		case "1100":
 		case "1101":
 		case "1111":
-			return toBits("001");// Subtract OPCODE
+			return "001";// Subtract OPCODE
 		case "0101":
-			return toBits("010");// BITWISE AND OPCODE
+			return "010";// BITWISE AND OPCODE
 		case "0110":
-			return toBits("011");// BITWISE OR OPCODE
+			return "011";// BITWISE OR OPCODE
 		case "0111":
-			return toBits("100");// BITWISE NOT OPCODE
+			return "100";// BITWISE NOT OPCODE
 		case "1110":
-			return toBits("101");// SHIFTLEFTLOGICAL
+			return "101";// SHIFTLEFTLOGICAL
 		default:
-			return toBits("111");// NOT ALU OPERATION
+			return "111";// NOT ALU OPERATION
 		}
 	}
 

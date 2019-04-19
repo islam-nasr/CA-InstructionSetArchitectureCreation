@@ -5,26 +5,23 @@ import java.util.BitSet;
 import alu.ALU_Controller;
 
 public class ControlUnit {
+	int regDst = 0;
+	int regWrite = 0;
+	int ra = 0;
+	int PCSrc = 0;
+	int memToReg = 0;
+	int memRead = 0;
+	int memWrite = 0;
+	int not = 0;
+	int ALUSrc = 0;
+	int skip = 0;
+	int max = 0;
+	int min = 0;
+	int setll = 0;
 
-	@SuppressWarnings("unused")
-	public static void getControlSignals(BitSet opcode) {
-		String OpcodeString = ALU_Controller.getBits(opcode);
+	public void getControlSignals(String opcode) {
 
-		int regDst = 0;
-		int regWrite = 0;
-		int ra = 0;
-		int PCSrc = 0;
-		int memToReg = 0;
-		int memRead = 0;
-		int memWrite = 0;
-		int not = 0;
-		int ALUSrc = 0;
-		int skip = 0;
-		int max = 0;
-		int min = 0;
-		int setll = 0;
-
-		switch (OpcodeString) {
+		switch (opcode) {
 		case "0000":
 			regDst = 1;
 			regWrite = 1;
