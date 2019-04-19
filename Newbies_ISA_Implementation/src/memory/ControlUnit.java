@@ -15,7 +15,7 @@ public class ControlUnit {
 	int min = 0;
 	int setll = 0;
 
-	public void getControlSignals(String opcode) {
+	public void setControlSignals(String opcode) {
 
 		switch (opcode) {
 		case "0000":

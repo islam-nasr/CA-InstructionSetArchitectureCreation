@@ -15,9 +15,9 @@ public class InstructionDecode extends Stage {
 	String instruction;
 	ControlUnit control;
 
-	public InstructionDecode() {
-		super();
-	}
+	// public InstructionDecode() {
+	// super();
+	// }
 
 	public InstructionDecode(String instruction, ControlUnit control) {
 		super();
@@ -46,7 +46,6 @@ public class InstructionDecode extends Stage {
 				signExtend = "0" + signExtend;
 			else
 				signExtend = "1" + signExtend;
-
 		}
 
 	}

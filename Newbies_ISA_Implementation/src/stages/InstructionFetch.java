@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
-import memory.ControlUnit;
 import memory.InstructionMemory;
 import memory.RegisterFileInitialization;
 
@@ -29,7 +28,6 @@ public class InstructionFetch extends Stage {
 		while (instruction.length() < 16) {
 			instruction = "0" + instruction;
 		}
-		ControlUnit controlUnit = new ControlUnit();
 		return instruction;
 	}
 

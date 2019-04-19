@@ -30,7 +30,7 @@ public class Simulator {
 					// execute the process
 					String instruction = ((InstructionFetch) stage).execute(j);
 					String opcode = instruction.substring(0, 5);
-					control.getControlSignals(opcode);
+					control.setControlSignals(opcode);
 					processes.remove(i);
 					processes.add(i, new InstructionDecode(instruction, control));
 				}
@@ -38,15 +38,21 @@ public class Simulator {
 				else if (stage instanceof InstructionDecode) {
 					// execute the process
 					((InstructionDecode) stage).execute();
-
+					int readData1 = ((InstructionDecode) stage).getReadData1();
+					int readData2 = ((InstructionDecode) stage).getReadData2();
+					String signExtend = ((InstructionDecode) stage).getSignExtend();
 					processes.remove(i);
-					processes.add(i, new InstructionExecute());
+					processes.add(i, new InstructionExecute(control, readData1, readData2, signExtend));
 				}
 
 				else if (stage instanceof InstructionExecute) {
 					// execute the process
 					((InstructionExecute) stage).execute();
+					ControlUnit cpu = ((InstructionExecute) stage).getControl();
+					String result = ((InstructionExecute) stage).getResult();
+					int readData1 = ((InstructionExecute) stage).getReadData1();
 					processes.remove(i);
+					// call memory stage with these stuff
 					processes.add(i, new MemoryStage());
 				}
 
