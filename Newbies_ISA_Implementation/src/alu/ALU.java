@@ -1,7 +1,26 @@
 package alu;
 
-
 public class ALU {
+	int result;
+	boolean isALU = true;
+	boolean isEqual = false;
+	boolean lastbit = false;
+
+	public int getResult() {
+		return result;
+	}
+
+	public boolean isALU() {
+		return isALU;
+	}
+
+	public boolean isEqual() {
+		return isEqual;
+	}
+
+	public boolean isLastbit() {
+		return lastbit;
+	}
 
 	@SuppressWarnings("unused")
 	/***
@@ -14,11 +33,7 @@ public class ALU {
 	 *            second operand
 	 * @return result of the operation
 	 */
-	public static int Operation(String Opcode, int value1, int value2) {
-		int result;
-		boolean isALU = true;
-		boolean isEqual = false;
-		boolean lastbit = false;
+	public int Operation(String Opcode, int value1, int value2) {
 		switch (Opcode) {
 		case "000":
 			result = value1 + value2;
