@@ -1,6 +1,5 @@
 package alu;
 
-
 public class ALU {
 
 	@SuppressWarnings("unused")

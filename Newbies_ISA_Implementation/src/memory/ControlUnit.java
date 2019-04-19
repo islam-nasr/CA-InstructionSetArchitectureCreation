@@ -1,9 +1,5 @@
 package memory;
 
-import java.util.BitSet;
-
-import alu.ALU_Controller;
-
 public class ControlUnit {
 	int regDst = 0;
 	int regWrite = 0;
@@ -78,6 +74,58 @@ public class ControlUnit {
 			skip = 1;
 			break;
 		}
+	}
+
+	public int getRegDst() {
+		return regDst;
+	}
+
+	public int getRegWrite() {
+		return regWrite;
+	}
+
+	public int getRa() {
+		return ra;
+	}
+
+	public int getPCSrc() {
+		return PCSrc;
+	}
+
+	public int getMemToReg() {
+		return memToReg;
+	}
+
+	public int getMemRead() {
+		return memRead;
+	}
+
+	public int getMemWrite() {
+		return memWrite;
+	}
+
+	public int getNot() {
+		return not;
+	}
+
+	public int getALUSrc() {
+		return ALUSrc;
+	}
+
+	public int getSkip() {
+		return skip;
+	}
+
+	public int getMax() {
+		return max;
+	}
+
+	public int getMin() {
+		return min;
+	}
+
+	public int getSetll() {
+		return setll;
 	}
 
 }

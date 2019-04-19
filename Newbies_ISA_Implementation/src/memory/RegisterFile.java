@@ -1,7 +1,7 @@
 package memory;
 
 public class RegisterFile {
-	Register[] registers;
+	static Register[] registers;
 
 	public RegisterFile() {
 		registers = new Register[16];
@@ -25,6 +25,7 @@ public class RegisterFile {
 	 * @param registers
 	 *            new array containing the registers
 	 */
+	@SuppressWarnings("static-access")
 	public void setRegisters(Register[] registers) {
 		this.registers = registers;
 	}
@@ -47,7 +48,7 @@ public class RegisterFile {
 	 *            the register number to read that value at
 	 * @return the value in the register
 	 */
-	public int readRegisterValue(int index) {
+	public static int readRegisterValue(int index) {
 		return registers[index].getValue();
 	}
 
