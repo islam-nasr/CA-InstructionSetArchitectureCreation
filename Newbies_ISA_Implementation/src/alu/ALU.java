@@ -6,23 +6,6 @@ public class ALU {
 	boolean isEqual = false;
 	boolean lastbit = false;
 
-	public int getResult() {
-		return result;
-	}
-
-	public boolean isALU() {
-		return isALU;
-	}
-
-	public boolean isEqual() {
-		return isEqual;
-	}
-
-	public boolean isLastbit() {
-		return lastbit;
-	}
-
-	@SuppressWarnings("unused")
 	/***
 	 * 
 	 * @param Opcode
@@ -33,7 +16,7 @@ public class ALU {
 	 *            second operand
 	 * @return result of the operation
 	 */
-	public int Operation(String Opcode, int value1, int value2) {
+	public int operate(String Opcode, int value1, int value2) {
 		switch (Opcode) {
 		case "000":
 			result = value1 + value2;
@@ -66,4 +49,21 @@ public class ALU {
 		return result;
 
 	}
+
+	public int getResult() {
+		return result;
+	}
+
+	public boolean isALU() {
+		return isALU;
+	}
+
+	public boolean isEqual() {
+		return isEqual;
+	}
+
+	public boolean isLastbit() {
+		return lastbit;
+	}
+
 }

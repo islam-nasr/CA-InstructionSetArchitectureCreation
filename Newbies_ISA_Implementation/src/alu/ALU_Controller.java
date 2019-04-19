@@ -1,7 +1,5 @@
 package alu;
 
-import java.util.BitSet;
-
 public class ALU_Controller {
 	// add:
 	// read opcode 0001 adds immediate with memory location
@@ -34,7 +32,7 @@ public class ALU_Controller {
 	 *            to check the code entering to determine which operation to use
 	 * @return operation code to go to the ALU
 	 */
-	public static String alucontrol(String Opcode) {
+	public static String getALUoperation(String Opcode) {
 		switch (Opcode) {
 		case "0001":
 		case "0010":
@@ -57,25 +55,6 @@ public class ALU_Controller {
 		default:
 			return "111";// NOT ALU OPERATION
 		}
-	}
-
-	public static String getBits(BitSet b) {
-		String x = "";
-
-		for (int i = 0; i < b.length(); i++) {
-			x += b.get(i) ? "1" : "0";
-		}
-		return x;
-	}
-
-	public static BitSet toBits(String b) {
-		BitSet r = new BitSet(b.length());
-
-		for (int i = 0; i < b.length(); i++) {
-			if (b.charAt(i) == 1)
-				r.set(i, true);
-		}
-		return r;
 	}
 
 	/*

@@ -5,10 +5,38 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+
+import memory.ControlUnit;
 import memory.InstructionMemory;
 import memory.RegisterFileInitialization;
 
-public class InstructionsFetch {
+public class InstructionFetch extends Stage {
+
+	public InstructionFetch() {
+		super();
+	}
+
+	/***
+	 * takes i and returns the element in position i in instruction memory
+	 * 
+	 * @param i
+	 *            position to access now
+	 * @return String representing the instruction
+	 **
+	 */
+	public String execute(int i) {
+		String instruction = Integer.toBinaryString(InstructionMemory.getInstruction(i * 2));
+		while (instruction.length() < 16) {
+			instruction = "0" + instruction;
+		}
+		ControlUnit controlUnit = new ControlUnit();
+		return instruction;
+	}
+
+	public void execute() {
+		System.out.println("Executing fetching........");
+	}
+
 	/***
 	 * reads the instructions and writes them to the instruction memory
 	 * 
@@ -17,7 +45,6 @@ public class InstructionsFetch {
 	 **
 	 */
 	public static void readInstructions(String filePath) throws IOException {
-		@SuppressWarnings("resource")
 		BufferedReader bf = new BufferedReader(new FileReader(new File(filePath)));
 		String line = bf.readLine();
 		int i = 0;
@@ -26,7 +53,7 @@ public class InstructionsFetch {
 			i += 2;
 			line = bf.readLine();
 		}
-
+		bf.close();
 	}
 
 	/***
@@ -94,32 +121,5 @@ public class InstructionsFetch {
 		}
 
 		return instruction;
-	}
-
-	/***
-	 * takes i and returns the element in position i in instruction memory
-	 * 
-	 * @param i
-	 *            position to access now
-	 * @return String representing the instruction
-	 **
-	 */
-	public static String fetchInstruction(int i) {
-		String x = Integer.toBinaryString(InstructionMemory.getInstruction(i * 2));
-		while (x.length() < 16) {
-			x = "0" + x;
-		}
-		return x;
-	}
-
-	public static void main(String[] args) {
-		String x = "0011";
-		int y = Integer.parseInt(x, 2) << 12;
-		String x2 = "1111";
-		int y2 = Integer.parseInt(x2, 2) << 8;
-
-		System.out.println(Integer.toBinaryString(y | y2));
-		System.out.println(Integer.toBinaryString(y >> 12));
-
 	}
 }

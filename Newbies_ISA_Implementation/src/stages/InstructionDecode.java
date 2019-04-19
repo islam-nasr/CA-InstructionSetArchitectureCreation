@@ -1,18 +1,31 @@
 package stages;
 
-import memory.ControlUnit;
 import java.util.HashMap;
+
 import alu.MUXsim;
-import memory.RegisterFileInitialization;
+import memory.ControlUnit;
 import memory.RegisterFile;
+import memory.RegisterFileInitialization;
 
-public class InstructionsDecoding {
-	static int readData1;
-	static int readData2;
-	static String signExtend;
-	static int writeRegisterNumber;
+public class InstructionDecode extends Stage {
+	int readData1;
+	int readData2;
+	String signExtend;
+	int writeRegisterNumber;
+	String instruction;
+	ControlUnit control;
 
-	public static void Decode(String instruction, ControlUnit control) {
+	public InstructionDecode() {
+		super();
+	}
+
+	public InstructionDecode(String instruction, ControlUnit control) {
+		super();
+		this.instruction = instruction;
+		this.control = control;
+	}
+
+	public void execute() {
 		String readRegister2 = instruction.substring(instruction.length() - 4, instruction.length());
 		String readRegister1 = instruction.substring(instruction.length() - 8, instruction.length() - 4);
 		String rD = instruction.substring(instruction.length() - 12, instruction.length() - 8);
@@ -38,20 +51,24 @@ public class InstructionsDecoding {
 
 	}
 
-	public static int getReadData1() {
+	public int getReadData1() {
 		return readData1;
 	}
 
-	public static int getReadData2() {
+	public int getReadData2() {
 		return readData2;
 	}
 
-	public static String getSignExtend() {
+	public String getSignExtend() {
 		return signExtend;
 	}
 
-	public static int getWriteRegisterNumber() {
+	public int getWriteRegisterNumber() {
 		return writeRegisterNumber;
 	}
+
+	/*
+	 * public void execute() { System.out.println("Executing decoding......"); }
+	 */
 
 }
