@@ -26,10 +26,14 @@ public class InstructionDecode extends Stage {
 	}
 
 	public void execute() {
+		System.out.println("==================================================================");
 		System.out.println("Executing decoding....");
+		RegisterFile.toPrint();
 		String readRegister2 = instruction.substring(instruction.length() - 4, instruction.length());
 		String readRegister1 = instruction.substring(instruction.length() - 8, instruction.length() - 4);
 		String rD = instruction.substring(instruction.length() - 12, instruction.length() - 8);
+		System.out.print(
+				"Register Code:" + '\n' + "RD: " + rD + " RS: " + readRegister1 + " RT: " + readRegister2 + '\n');
 		String writeRegister = MUXsim.MUX(readRegister2, rD, control.getRegDst());
 		HashMap<String, Integer> positionStrings = RegisterFileInitialization.positionStrings;
 		int registerNumber1 = positionStrings.get(readRegister1).intValue();
@@ -48,6 +52,7 @@ public class InstructionDecode extends Stage {
 			else
 				signExtend = "1" + signExtend;
 		}
+		this.toPrint();
 
 	}
 
@@ -68,10 +73,14 @@ public class InstructionDecode extends Stage {
 	}
 
 	public ControlUnit getControl() {
-		// TODO Auto-generated method stub
 		return control;
 	}
 
+	public void toPrint() {
+		// TODO Auto-generated method stub
+		System.out.print("Data output:" + '\n' + "ReadData1: " + readData1 + " ReadData2: " + readData2
+				+ " Sign Extend: " + signExtend + " WriteRegister: " + writeRegisterNumber + '\n');
+	}
 	/*
 	 * public void execute() { System.out.println("Executing decoding......"); }
 	 */

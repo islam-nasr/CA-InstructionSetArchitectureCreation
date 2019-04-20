@@ -4,16 +4,13 @@ public class ALU {
 	int result;
 	boolean isALU = true;
 	boolean isEqual = false;
-	boolean lastbit = false;
+	int lastbit = 0;
 
 	/***
 	 * 
-	 * @param Opcode
-	 *            value entering the ALU to determine which operator to use
-	 * @param value1
-	 *            first operand
-	 * @param value2
-	 *            second operand
+	 * @param Opcode value entering the ALU to determine which operator to use
+	 * @param value1 first operand
+	 * @param value2 second operand
 	 * @return result of the operation
 	 */
 	public int operate(String Opcode, int value1, int value2) {
@@ -44,7 +41,7 @@ public class ALU {
 
 		}
 		if (result < 0) {
-			lastbit = true;
+			lastbit = 1;
 		}
 		return result;
 
@@ -62,7 +59,7 @@ public class ALU {
 		return isEqual;
 	}
 
-	public boolean isLastbit() {
+	public int lastBit() {
 		return lastbit;
 	}
 

@@ -10,6 +10,7 @@ import memory.InstructionMemory;
 import memory.RegisterFileInitialization;
 
 public class InstructionFetch extends Stage {
+	String inst;
 
 	public InstructionFetch() {
 		super();
@@ -18,17 +19,19 @@ public class InstructionFetch extends Stage {
 	/***
 	 * takes i and returns the element in position i in instruction memory
 	 * 
-	 * @param i
-	 *            position to access now
+	 * @param i position to access now
 	 * @return String representing the instruction
 	 **
 	 */
 	public String execute(int i) {
+		System.out.println("==================================================================");
 		System.out.println("Executing fetching........");
 		String instruction = Integer.toBinaryString(InstructionMemory.getInstruction(i * 2));
 		while (instruction.length() < 16) {
 			instruction = "0" + instruction;
 		}
+		inst = instruction;
+		this.toPrint();
 		return instruction;
 	}
 
@@ -39,8 +42,7 @@ public class InstructionFetch extends Stage {
 	/***
 	 * reads the instructions and writes them to the instruction memory
 	 * 
-	 * @param filePath
-	 *            takes the path of the instructions we want to execute
+	 * @param filePath takes the path of the instructions we want to execute
 	 **
 	 */
 	public static void readInstructions(String filePath) throws IOException {
@@ -59,8 +61,7 @@ public class InstructionFetch extends Stage {
 	 * takes the line of code to translate it to binary code to be written to the
 	 * instruction memory
 	 * 
-	 * @param line
-	 *            code currently being decoded
+	 * @param line code currently being decoded
 	 * @return the int value of the binary code
 	 **
 	 */
@@ -120,5 +121,10 @@ public class InstructionFetch extends Stage {
 		}
 
 		return instruction;
+	}
+
+	public void toPrint() {
+		// TODO Auto-generated method stub
+		System.out.println("Fetch stage  got instruction: " + inst);
 	}
 }

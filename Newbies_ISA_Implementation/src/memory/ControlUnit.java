@@ -14,13 +14,18 @@ public class ControlUnit {
 	int max = 0;
 	int min = 0;
 	int setll = 0;
+	int creative = 0;
+	int Loadi = 0;
+	String opcode = "XXXX";
 
 	public void setControlSignals(String opcode) {
+		this.opcode = opcode;
 
 		switch (opcode) {
 		case "0000":
 			regDst = 1;
 			regWrite = 1;
+			Loadi = 1;
 			break;
 		case "0001":
 			regDst = 1;
@@ -52,16 +57,19 @@ public class ControlUnit {
 			PCSrc = 1;
 			break;
 		case "1011":
+			creative = 1;
 			min = 1;
 			regDst = 1;
 			regWrite = 1;
 			break;
 		case "1100":
+			creative = 1;
 			max = 1;
 			regDst = 1;
 			regWrite = 1;
 			break; // check!!!
 		case "1101":
+			creative = 1;
 			setll = 1;
 			regWrite = 1;
 			regDst = 1;
@@ -74,6 +82,10 @@ public class ControlUnit {
 			skip = 1;
 			break;
 		}
+	}
+
+	public int getLoadi() {
+		return Loadi;
 	}
 
 	public int getRegDst() {
@@ -126,6 +138,33 @@ public class ControlUnit {
 
 	public int getSetll() {
 		return setll;
+	}
+
+	public int getCreative() {
+		return creative;
+	}
+
+	public String getOpcode() {
+		return opcode;
+	}
+
+	public void toPrint() {
+		System.out.println("Control Unit being printed!");
+		System.out.println("RegDst : " + regDst);
+		System.out.println("RegWrite : " + regWrite);
+		System.out.println("RA : " + ra);
+		System.out.println("PCSrc : " + PCSrc);
+		System.out.println("MemToReg : " + memToReg);
+		System.out.println("MemToRead : " + memRead);
+		System.out.println("MemWrite : " + memWrite);
+		System.out.println("Not : " + not);
+		System.out.println("ALUSrc : " + ALUSrc);
+		System.out.println("Skip : " + skip);
+		System.out.println("Max : " + max);
+		System.out.println("Min : " + min);
+		System.out.println("SetLessThan : " + setll);
+		System.out.println("Creative : " + creative);
+		System.out.println("Loadi : " + Loadi);
 	}
 
 }

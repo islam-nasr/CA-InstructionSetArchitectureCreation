@@ -30,10 +30,9 @@ public class Simulator {
 
 		int clockcycles = 1;
 		for (int pc = 0; pc < InstructionMemory.numberOfInstructions; pc++) {
-			System.out.println("____________________" + '\n' + "Clockcycle: " + clockcycles);
+			System.out.println("Clockcycle: " + clockcycles + '\n' + "____________________");
 			Stage s = new InstructionFetch();
 			processes.add(s);
-			clockcycles++;
 			// for loop over all current processes
 			for (int i = 0; i < processes.size(); i++) {
 				// get the process at this index
@@ -43,9 +42,10 @@ public class Simulator {
 				if (stage instanceof InstructionFetch) {
 					// execute the process
 					String instruction = ((InstructionFetch) stage).execute(pc);
-					String opcode = instruction.substring(0, 5);
+					String opcode = instruction.substring(0, 4);
 					ControlUnit control = new ControlUnit();
 					control.setControlSignals(opcode);
+					control.toPrint();
 					processes.remove(i);
 					processes.add(i, new InstructionDecode(instruction, control));
 				}
@@ -70,9 +70,13 @@ public class Simulator {
 					ControlUnit cpu = ((InstructionExecute) stage).getControl();
 					String result = ((InstructionExecute) stage).getResult();
 					int readData1 = ((InstructionExecute) stage).getReadData1();
+					int readData2 = ((InstructionExecute) stage).getReadData2();
+					int fifteenthBit = ((InstructionExecute) stage).getLastBit();
 					processes.remove(i);
 					// call memory stage with these stuff
-					processes.add(i, new MemoryStage(cpu, readData1, result,writeRegisterNumber));
+					// passing readData1 twice as it is taken twice
+					processes.add(i, new MemoryStage(cpu, readData1, readData1, readData2, result, writeRegisterNumber,
+							fifteenthBit));
 				}
 
 				else if (stage instanceof MemoryStage) {
@@ -80,9 +84,15 @@ public class Simulator {
 					((MemoryStage) stage).execute();
 					int writeRegisterNumber = ((MemoryStage) stage).getWriteRegisterNumber();
 					String result = ((MemoryStage) stage).getResult();
-					ControlUnit cpu = ((InstructionExecute) stage).getControl();
+					int readData = ((MemoryStage) stage).getDataOut();
+					int readData1 = ((MemoryStage) stage).getReadData1();
+					int readData2 = ((MemoryStage) stage).getReadData2();
+					ControlUnit cpu = ((MemoryStage) stage).getControl();
+					String signExtend = ((MemoryStage) stage).getSignExtend();
+					int fifteenthBit = ((MemoryStage) stage).getLastBit();
 					processes.remove(i);
-					//processes.add(i, new WriteBackStage(cpu,writeRegisterNumber,result,));
+					processes.add(i, new WriteBackStage(cpu, writeRegisterNumber, result, readData, readData1,
+							readData2, fifteenthBit));
 				}
 
 				else if (stage instanceof WriteBackStage) {
@@ -91,10 +101,11 @@ public class Simulator {
 					processes.remove(i);
 					i--;
 				}
+
+				clockcycles++;
 			}
 			if (pc == InstructionMemory.numberOfInstructions - 1) {
 				while (!processes.isEmpty()) {
-					clockcycles++;
 					System.out.println("____________________" + '\n' + "Clockcycle: " + clockcycles);
 
 					for (int i = 0; i < processes.size(); i++) {
@@ -119,26 +130,42 @@ public class Simulator {
 							int readData1 = ((InstructionDecode) stage).getReadData1();
 							int readData2 = ((InstructionDecode) stage).getReadData2();
 							String signExtend = ((InstructionDecode) stage).getSignExtend();
+							int writeRegister = ((InstructionDecode) stage).getWriteRegisterNumber();
 							processes.remove(i);
-							processes.add(i, new InstructionExecute(cpu, readData1, readData2, signExtend));
+							processes.add(i,
+									new InstructionExecute(cpu, readData1, readData2, signExtend, writeRegister));
 						}
 
 						else if (stage instanceof InstructionExecute) {
 							// execute the process
 							((InstructionExecute) stage).execute();
+							int writeRegisterNumber = ((InstructionExecute) stage).getWriteRegisterNumber();
 							ControlUnit cpu = ((InstructionExecute) stage).getControl();
 							String result = ((InstructionExecute) stage).getResult();
 							int readData1 = ((InstructionExecute) stage).getReadData1();
+							int readData2 = ((InstructionExecute) stage).getReadData2();
+							int fifteenthBit = ((InstructionExecute) stage).getLastBit();
 							processes.remove(i);
 							// call memory stage with these stuff
-							processes.add(i, new MemoryStage(cpu, readData1, result));
+							// passing readData1 twice as it is taken twice
+							processes.add(i, new MemoryStage(cpu, readData1, readData1, readData2, result,
+									writeRegisterNumber, fifteenthBit));
 						}
 
 						else if (stage instanceof MemoryStage) {
 							// execute the process
 							((MemoryStage) stage).execute();
+							int writeRegisterNumber = ((MemoryStage) stage).getWriteRegisterNumber();
+							String result = ((MemoryStage) stage).getResult();
+							int readData = ((MemoryStage) stage).getDataOut();
+							int readData1 = ((MemoryStage) stage).getReadData1();
+							int readData2 = ((MemoryStage) stage).getReadData2();
+							ControlUnit cpu = ((MemoryStage) stage).getControl();
+							String signExtend = ((MemoryStage) stage).getSignExtend();
+							int fifteenthBit = ((MemoryStage) stage).getLastBit();
 							processes.remove(i);
-							processes.add(i, new WriteBackStage());
+							processes.add(i, new WriteBackStage(cpu, writeRegisterNumber, result, readData, readData1,
+									readData2, fifteenthBit));
 						}
 
 						else if (stage instanceof WriteBackStage) {
@@ -149,11 +176,10 @@ public class Simulator {
 						}
 					}
 				}
-
+				clockcycles++;
 			}
-
+			System.out
+					.println("______________________________________________________________________________________");
 		}
-
 	}
-
 }

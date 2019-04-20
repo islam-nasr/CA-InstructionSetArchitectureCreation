@@ -38,8 +38,7 @@ public class RegisterFile {
 	/**
 	 * sets the registers to given register array
 	 * 
-	 * @param registers
-	 *            new array containing the registers
+	 * @param registers new array containing the registers
 	 */
 	@SuppressWarnings("static-access")
 	public void setRegisters(Register[] registers) {
@@ -49,8 +48,7 @@ public class RegisterFile {
 	/**
 	 * reads complete register from the registers array
 	 * 
-	 * @param index
-	 *            the register number to return
+	 * @param index the register number to return
 	 * @return the register
 	 */
 	public Register readRegister(int index) {
@@ -60,8 +58,7 @@ public class RegisterFile {
 	/**
 	 * reads a value from a register
 	 * 
-	 * @param index
-	 *            the register number to read that value at
+	 * @param index the register number to read that value at
 	 * @return the value in the register
 	 */
 	public static int readRegisterValue(int index) {
@@ -71,12 +68,10 @@ public class RegisterFile {
 	/**
 	 * writes a value into a register
 	 * 
-	 * @param index
-	 *            the register number to write that value at
-	 * @param value
-	 *            the value being written in the register
+	 * @param index the register number to write that value at
+	 * @param value the value being written in the register
 	 */
-	public void writeRegister(int index, int value) {
+	public static void writeRegister(int index, int value) {
 		registers[index].setValue(value);
 	}
 
@@ -86,5 +81,14 @@ public class RegisterFile {
 		for (int i = 0; i < 16; i++)
 			r += registers[i].toString() + "\n";
 		return r;
+	}
+
+	public static void toPrint() {
+		// TODO Auto-generated method stub
+		String r = "";
+		for (int i = 0; i < 16; i++)
+			r += registers[i].toString() + "\n";
+		System.out.println(r);
+
 	}
 }
