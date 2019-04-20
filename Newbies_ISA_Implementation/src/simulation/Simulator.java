@@ -27,13 +27,12 @@ public class Simulator {
 		} catch (IOException e) {
 			System.out.println("mesh la2y om el file");
 		}
-		
-		int clockcycles=1;
-		for(int pc=0;pc<InstructionMemory.numberOfInstructions;pc++) {
-			System.out.println("____________________"+'\n'+"Clockcycle: "+clockcycles);
+
+		int clockcycles = 1;
+		for (int pc = 0; pc < InstructionMemory.numberOfInstructions; pc++) {
+			System.out.println("____________________" + '\n' + "Clockcycle: " + clockcycles);
 			Stage s = new InstructionFetch();
 			processes.add(s);
-			ControlUnit control = new ControlUnit();
 			clockcycles++;
 			// for loop over all current processes
 			for (int i = 0; i < processes.size(); i++) {
@@ -45,6 +44,7 @@ public class Simulator {
 					// execute the process
 					String instruction = ((InstructionFetch) stage).execute(pc);
 					String opcode = instruction.substring(0, 5);
+					ControlUnit control = new ControlUnit();
 					control.setControlSignals(opcode);
 					processes.remove(i);
 					processes.add(i, new InstructionDecode(instruction, control));
@@ -53,29 +53,36 @@ public class Simulator {
 				else if (stage instanceof InstructionDecode) {
 					// execute the process
 					((InstructionDecode) stage).execute();
+					ControlUnit cpu = ((InstructionDecode) stage).getControl();
 					int readData1 = ((InstructionDecode) stage).getReadData1();
 					int readData2 = ((InstructionDecode) stage).getReadData2();
+					int writeRegisterNumber = ((InstructionDecode) stage).getWriteRegisterNumber();
 					String signExtend = ((InstructionDecode) stage).getSignExtend();
 					processes.remove(i);
-					processes.add(i, new InstructionExecute(control, readData1, readData2, signExtend));
+					processes.add(i,
+							new InstructionExecute(cpu, readData1, readData2, signExtend, writeRegisterNumber));
 				}
 
 				else if (stage instanceof InstructionExecute) {
 					// execute the process
 					((InstructionExecute) stage).execute();
+					int writeRegisterNumber = ((InstructionExecute) stage).getWriteRegisterNumber();
 					ControlUnit cpu = ((InstructionExecute) stage).getControl();
 					String result = ((InstructionExecute) stage).getResult();
 					int readData1 = ((InstructionExecute) stage).getReadData1();
 					processes.remove(i);
 					// call memory stage with these stuff
-					processes.add(i, new MemoryStage());
+					processes.add(i, new MemoryStage(cpu, readData1, result,writeRegisterNumber));
 				}
 
 				else if (stage instanceof MemoryStage) {
 					// execute the process
 					((MemoryStage) stage).execute();
+					int writeRegisterNumber = ((MemoryStage) stage).getWriteRegisterNumber();
+					String result = ((MemoryStage) stage).getResult();
+					ControlUnit cpu = ((InstructionExecute) stage).getControl();
 					processes.remove(i);
-					processes.add(i, new WriteBackStage());
+					//processes.add(i, new WriteBackStage(cpu,writeRegisterNumber,result,));
 				}
 
 				else if (stage instanceof WriteBackStage) {
@@ -85,69 +92,68 @@ public class Simulator {
 					i--;
 				}
 			}
-		if(pc==InstructionMemory.numberOfInstructions-1) {
-			while(!processes.isEmpty()) {
-				clockcycles++;
-				System.out.println("____________________"+'\n'+"Clockcycle: "+clockcycles);
+			if (pc == InstructionMemory.numberOfInstructions - 1) {
+				while (!processes.isEmpty()) {
+					clockcycles++;
+					System.out.println("____________________" + '\n' + "Clockcycle: " + clockcycles);
 
-			
-			for (int i = 0; i < processes.size(); i++) {
-				// get the process at this index
-				Stage stage = processes.get(i);
-				// remove the process
-				// processes.remove(i);
-				if (stage instanceof InstructionFetch) {
-					// execute the process
-					String instruction = ((InstructionFetch) stage).execute(pc);
-					String opcode = instruction.substring(0, 5);
-					control.setControlSignals(opcode);
-					processes.remove(i);
-					processes.add(i, new InstructionDecode(instruction, control));
+					for (int i = 0; i < processes.size(); i++) {
+						// get the process at this index
+						Stage stage = processes.get(i);
+						// remove the process
+						// processes.remove(i);
+						if (stage instanceof InstructionFetch) {
+							// execute the process
+							ControlUnit control = new ControlUnit();
+							String instruction = ((InstructionFetch) stage).execute(pc);
+							String opcode = instruction.substring(0, 5);
+							control.setControlSignals(opcode);
+							processes.remove(i);
+							processes.add(i, new InstructionDecode(instruction, control));
+						}
+
+						else if (stage instanceof InstructionDecode) {
+							// execute the process
+							((InstructionDecode) stage).execute();
+							ControlUnit cpu = ((InstructionDecode) stage).getControl();
+							int readData1 = ((InstructionDecode) stage).getReadData1();
+							int readData2 = ((InstructionDecode) stage).getReadData2();
+							String signExtend = ((InstructionDecode) stage).getSignExtend();
+							processes.remove(i);
+							processes.add(i, new InstructionExecute(cpu, readData1, readData2, signExtend));
+						}
+
+						else if (stage instanceof InstructionExecute) {
+							// execute the process
+							((InstructionExecute) stage).execute();
+							ControlUnit cpu = ((InstructionExecute) stage).getControl();
+							String result = ((InstructionExecute) stage).getResult();
+							int readData1 = ((InstructionExecute) stage).getReadData1();
+							processes.remove(i);
+							// call memory stage with these stuff
+							processes.add(i, new MemoryStage(cpu, readData1, result));
+						}
+
+						else if (stage instanceof MemoryStage) {
+							// execute the process
+							((MemoryStage) stage).execute();
+							processes.remove(i);
+							processes.add(i, new WriteBackStage());
+						}
+
+						else if (stage instanceof WriteBackStage) {
+							// execute the process
+							((WriteBackStage) stage).execute();
+							processes.remove(i);
+							i--;
+						}
+					}
 				}
 
-				else if (stage instanceof InstructionDecode) {
-					// execute the process
-					((InstructionDecode) stage).execute();
-					int readData1 = ((InstructionDecode) stage).getReadData1();
-					int readData2 = ((InstructionDecode) stage).getReadData2();
-					String signExtend = ((InstructionDecode) stage).getSignExtend();
-					processes.remove(i);
-					processes.add(i, new InstructionExecute(control, readData1, readData2, signExtend));
-				}
+			}
 
-				else if (stage instanceof InstructionExecute) {
-					// execute the process
-					((InstructionExecute) stage).execute();
-					ControlUnit cpu = ((InstructionExecute) stage).getControl();
-					String result = ((InstructionExecute) stage).getResult();
-					int readData1 = ((InstructionExecute) stage).getReadData1();
-					processes.remove(i);
-					// call memory stage with these stuff
-					processes.add(i, new MemoryStage());
-				}
-
-				else if (stage instanceof MemoryStage) {
-					// execute the process
-					((MemoryStage) stage).execute();
-					processes.remove(i);
-					processes.add(i, new WriteBackStage());
-				}
-
-				else if (stage instanceof WriteBackStage) {
-					// execute the process
-					((WriteBackStage) stage).execute();
-					processes.remove(i);
-					i--;
-				}
-			}}
-			
-			
-			
 		}
-		
-		
-		}
-		
+
 	}
 
 }

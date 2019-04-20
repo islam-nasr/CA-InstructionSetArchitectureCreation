@@ -12,13 +12,15 @@ public class InstructionExecute extends Stage {
 	private int readData1;
 	private int readData2;
 	private String signExtend;
-
-	public InstructionExecute(ControlUnit control, int readData1, int readData2, String signExtend) {
+	private int writeRegisterNumber;
+	
+	public InstructionExecute(ControlUnit control, int readData1, int readData2, String signExtend, int writeRegisterNumber) {
 		super();
 		this.control = control;
 		this.readData1 = readData1;
 		this.readData2 = readData2;
 		this.signExtend = signExtend;
+		this.writeRegisterNumber=writeRegisterNumber;
 	}
 
 	public void execute() {
@@ -46,6 +48,10 @@ public class InstructionExecute extends Stage {
 
 	public int getReadData1() {
 		return readData1;
+	}
+
+	public int getWriteRegisterNumber() {
+		return writeRegisterNumber;
 	}
 
 }

@@ -67,6 +67,11 @@ public class InstructionDecode extends Stage {
 		return writeRegisterNumber;
 	}
 
+	public ControlUnit getControl() {
+		// TODO Auto-generated method stub
+		return control;
+	}
+
 	/*
 	 * public void execute() { System.out.println("Executing decoding......"); }
 	 */

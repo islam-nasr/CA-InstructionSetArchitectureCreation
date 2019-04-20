@@ -5,12 +5,12 @@ public class DataMemory {
 	// private int maximumUsedAddress = -1;
 
 
-	public void write(int address, int value) {
+	public static void write(int address, int value) {
 		// maximumUsedAddress = Math.max(maximumUsedAddress, address/4);
 		data[address / 2] = value;
 	}
 	
-	public int read(int address) {
+	public static int read(int address) {
 		return data[address / 2];
 	}
 
