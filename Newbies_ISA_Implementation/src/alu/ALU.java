@@ -8,15 +8,21 @@ public class ALU {
 
 	/***
 	 * 
-	 * @param Opcode value entering the ALU to determine which operator to use
-	 * @param value1 first operand
-	 * @param value2 second operand
+	 * @param Opcode
+	 *            value entering the ALU to determine which operator to use
+	 * @param value1
+	 *            first operand
+	 * @param value2
+	 *            second operand
 	 * @return result of the operation
 	 */
 	public int operate(String Opcode, int value1, int value2) {
 		switch (Opcode) {
 		case "000":
 			result = value1 + value2;
+			System.out.println(value1);
+			System.out.println(value2);
+			System.out.println(result);
 			break;// call add method
 		case "001":
 			result = value1 - value2;

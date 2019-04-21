@@ -38,19 +38,26 @@ public class InstructionExecute extends Stage {
 
 		String first = MUXsim.MUX(Integer.toBinaryString(readData2), signExtend, ALUSrc);
 		String second = MUXsim.MUX(first, "0000000000000000", not);
-
+		int secondint;
 		ALU alu = new ALU();
-		alu.operate(ALUControl, readData1, Integer.parseInt(second, 2));
+		if (second.length() > 16)
+			second = second.substring(16);
+		if (second.charAt(0) == '1')
+			secondint = integerConverter.getTwosComplement(second);
+		else
+			secondint = Integer.parseInt(second, 2);
+		alu.operate(ALUControl, readData1, secondint);
 		System.out.println(
 				"First input to ALU: " + readData1 + '\n' + "Second input to ALU: " + Integer.parseInt(second, 2));
 		lastBit = alu.lastBit();
-		String ALUresult;
+		String ALUresult = Integer.toBinaryString(alu.getResult());
 		if (alu.getResult() < 0)
 			ALUresult = "1" + Integer.toBinaryString(alu.getResult());
 		else
 			ALUresult = "0" + Integer.toBinaryString(alu.getResult());
+		System.out.println();
 		System.out.println("Last bit: " + alu.lastBit());
-		System.out.println("Result from ALU: " + ALUresult);
+		System.out.println("Result from ALU: " + integerConverter.getTwosComplement(ALUresult));
 		this.result = MUXsim.MUX(ALUresult, signExtend, control.getLoadi());
 		System.out.println("Output from Execution Stage: " + result + " int value is: "
 				+ integerConverter.getTwosComplement(result));

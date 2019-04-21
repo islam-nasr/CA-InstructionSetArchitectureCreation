@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
+import alu.integerConverter;
 import memory.InstructionMemory;
 import memory.RegisterFileInitialization;
 
@@ -19,7 +20,8 @@ public class InstructionFetch extends Stage {
 	/***
 	 * takes i and returns the element in position i in instruction memory
 	 * 
-	 * @param i position to access now
+	 * @param i
+	 *            position to access now
 	 * @return String representing the instruction
 	 **
 	 */
@@ -42,7 +44,8 @@ public class InstructionFetch extends Stage {
 	/***
 	 * reads the instructions and writes them to the instruction memory
 	 * 
-	 * @param filePath takes the path of the instructions we want to execute
+	 * @param filePath
+	 *            takes the path of the instructions we want to execute
 	 **
 	 */
 	public static void readInstructions(String filePath) throws IOException {
@@ -61,7 +64,8 @@ public class InstructionFetch extends Stage {
 	 * takes the line of code to translate it to binary code to be written to the
 	 * instruction memory
 	 * 
-	 * @param line code currently being decoded
+	 * @param line
+	 *            code currently being decoded
 	 * @return the int value of the binary code
 	 **
 	 */
@@ -76,6 +80,8 @@ public class InstructionFetch extends Stage {
 			instruction = Integer.parseInt(parts[0], 2);
 		} else {
 			int function = bitStrings.get(parts[0]) << 12;
+			System.out.println("                                              " + function);
+			System.out.println("                                              " + Integer.toBinaryString(function));
 			if (StringType.get(parts[0]).equals("R")) {
 				if (bitStrings.get(parts[0]) == Integer.parseInt("1001", 2)) {
 					String rsName = parts[1];
@@ -113,8 +119,21 @@ public class InstructionFetch extends Stage {
 				else {
 					String rdName = parts[1];
 					int rd = regStrings.get(rdName) << 8;
-					int immediate = Integer.parseInt(parts[2]);// immediate is int
-					instruction = function | rd | immediate;
+					short immediate = Short.parseShort(parts[2]);// immediate is int
+					System.out.println();
+					String a = Integer.toBinaryString(immediate);
+					while (a.length() > 8) {
+						a = a.substring(1);
+					}
+					System.out.println(a);
+					short imm = (short) integerConverter.getTwosComplement(a);
+					System.out.println("           " + imm);
+					System.out.println("dah ebn el kalb el by3ml kda: " + Integer.toBinaryString(imm));
+					instruction = function | rd | imm;
+					System.out.println("INSTRUCTION FL FETCH!!!!" + instruction);
+					instruction = Integer.parseInt(integerConverter.dehElht7el(function, rd, a), 2);
+					System.out.println("RABENA YOSTOR: " + integerConverter.dehElht7el(function, rd, a));
+					System.out.println(instruction);
 
 				}
 			}
