@@ -5,8 +5,11 @@ public class DataMemory {
 	private static int maximumUsedAddress = -1;
 
 	public static void write(int address, int value) {
+		System.out.println("!!!!!!!!!!!!!");
+		
 		maximumUsedAddress = Math.max(maximumUsedAddress, address / 2);
 		data[address / 2] = value;
+		System.out.println(maximumUsedAddress);
 	}
 
 	public static int read(int address) {

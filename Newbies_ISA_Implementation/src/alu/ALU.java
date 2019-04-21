@@ -38,6 +38,7 @@ public class ALU {
 			result = ~value1;
 			break;// not
 		case "101":
+			System.out.println("CASE SHIFT:" +"Value1: "+value1+'\n'+"Value2:"+value2);
 			result = (value1 << value2);
 			break;// SLL
 		default:

@@ -3,6 +3,7 @@ package stages;
 import alu.MUXsim;
 import alu.integerConverter;
 import memory.ControlUnit;
+import memory.DataMemory;
 import memory.RegisterFile;
 
 public class WriteBackStage extends Stage {
@@ -53,6 +54,7 @@ public class WriteBackStage extends Stage {
 		System.out.println("Write Back Value: " + writeBackValue + '\n' + "Final Output Value: " + finalOutput);
 		RegisterFile.writeRegister(writeRegisterNumber, writeBackValue);
 		RegisterFile.toPrint();
+		DataMemory.toPrint();
 
 	}
 

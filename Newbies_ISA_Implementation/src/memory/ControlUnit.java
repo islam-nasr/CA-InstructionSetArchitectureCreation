@@ -75,6 +75,7 @@ public class ControlUnit {
 			regDst = 1;
 			break;
 		case "1110":
+			ALUSrc=1;
 			regDst = 1;
 			regWrite = 1;
 			break;
