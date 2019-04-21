@@ -175,8 +175,8 @@ public class Simulator {
 							i--;
 						}
 					}
+					clockcycles++;
 				}
-				clockcycles++;
 			}
 			System.out
 					.println("______________________________________________________________________________________");

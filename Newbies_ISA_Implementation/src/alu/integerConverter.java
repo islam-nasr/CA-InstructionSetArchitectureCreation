@@ -21,18 +21,12 @@ public class integerConverter {
 		}
 	}
 
-	public static String dehElht7el(int func, int rD, String imm) {
-		String function = Integer.toBinaryString(func);
-		// System.out.println("Your function belez:" + function);
-		String rDe = Integer.toBinaryString(rD);
+	public static String artificialOR(int func, int rD, String imm) {
 		String substring = Integer.toBinaryString(rD | func);
 		while (substring.length() != 16) {
 			substring = "0" + substring;
 		}
-		System.out.println(substring);
-		System.out.println(substring.substring(0, substring.length() - 8));
 		substring = substring.substring(0, substring.length() - 8) + imm;
-
 		return substring;
 	}
 
@@ -78,11 +72,11 @@ public class integerConverter {
 		}
 	}
 
-	public static void main(String[] args) {
-		// System.out.println(Integer.toBinaryString(-3));
-		// System.out.println(Integer.toBinaryString(-3).substring(16).length());
-		// System.out.println(getTwosComplement(Integer.toBinaryString(-3)));
-		System.out.println(getTwosComplement(toBinaryString(100)));
-
-	}
+	// public static void main(String[] args) {
+	// // System.out.println(Integer.toBinaryString(-3));
+	// // System.out.println(Integer.toBinaryString(-3).substring(16).length());
+	// // System.out.println(getTwosComplement(Integer.toBinaryString(-3)));
+	// System.out.println(getTwosComplement(toBinaryString(100)));
+	//
+	// }
 }

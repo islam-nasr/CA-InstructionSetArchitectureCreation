@@ -1,1 +1,6 @@
-RDI $t0 3
+RDI $t0 -3
+SUM $s0 $s0 $s0
+SUM $s0 $s0 $s0
+SUM $s0 $s0 $s0
+SUM $s0 $s0 $s0
+SUM $s0 $t0 $t0

@@ -80,8 +80,6 @@ public class InstructionFetch extends Stage {
 			instruction = Integer.parseInt(parts[0], 2);
 		} else {
 			int function = bitStrings.get(parts[0]) << 12;
-			System.out.println("                                              " + function);
-			System.out.println("                                              " + Integer.toBinaryString(function));
 			if (StringType.get(parts[0]).equals("R")) {
 				if (bitStrings.get(parts[0]) == Integer.parseInt("1001", 2)) {
 					String rsName = parts[1];
@@ -118,23 +116,17 @@ public class InstructionFetch extends Stage {
 				// I TYPE
 				else {
 					String rdName = parts[1];
-					int rd = regStrings.get(rdName) << 8;
-					short immediate = Short.parseShort(parts[2]);// immediate is int
-					System.out.println();
-					String a = Integer.toBinaryString(immediate);
-					while (a.length() > 8) {
-						a = a.substring(1);
-					}
-					System.out.println(a);
-					short imm = (short) integerConverter.getTwosComplement(a);
-					System.out.println("           " + imm);
-					System.out.println("dah ebn el kalb el by3ml kda: " + Integer.toBinaryString(imm));
-					instruction = function | rd | imm;
-					System.out.println("INSTRUCTION FL FETCH!!!!" + instruction);
-					instruction = Integer.parseInt(integerConverter.dehElht7el(function, rd, a), 2);
-					System.out.println("RABENA YOSTOR: " + integerConverter.dehElht7el(function, rd, a));
-					System.out.println(instruction);
-
+					int rdNumber = regStrings.get(rdName) << 8;
+					// immediate is 16 bits. needs to be changed to 8
+					byte immediate = Byte.parseByte(parts[2]);
+					String immediateTrimmed = integerConverter.toBinaryString(immediate).substring(8);
+					// updating the immediate after trimming the first 8 bits
+					immediate = (byte) integerConverter.getTwosComplement(immediateTrimmed);
+					System.out.println("EL MOSHKELA HENA " + integerConverter.toBinaryString(immediate));
+					instruction = Integer.parseInt(integerConverter.artificialOR(function, rdNumber, immediateTrimmed),
+							2);
+					System.out.println(
+							"ARTIFICIAL ORRING: " + integerConverter.artificialOR(function, rdNumber, immediateTrimmed));
 				}
 			}
 		}
