@@ -86,7 +86,7 @@ public class InstructionFetch extends Stage {
 					int rs = regStrings.get(rsName) << 8;
 					instruction = function | rs;
 				} else {
-					if (bitStrings.get(parts[0]) == Integer.parseInt("1111", 2)) {
+					if (bitStrings.get(parts[0]) == Integer.parseInt("1111", 2)||bitStrings.get(parts[0]) == Integer.parseInt("0111", 2)) {
 						String rsName = parts[1];
 						int rs = regStrings.get(rsName) << 8;
 

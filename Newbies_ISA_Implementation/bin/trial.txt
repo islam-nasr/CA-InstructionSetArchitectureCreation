@@ -1,8 +1,8 @@
 RDI $t0 -6
-RDI $t1 5
+RDI $t1 1
 SUM $s0 $s0 $s0
 SUM $s0 $s0 $s0
 SUM $s0 $s0 $s0
 SUM $s0 $s0 $s0
 SUM $s0 $t0 $t0
-SMN $t3 $t0 $t1
+NOT $t3 $t1
