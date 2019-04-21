@@ -32,8 +32,10 @@ public class WriteBackStage extends Stage {
 	public void execute() {
 		System.out.println("==================================================================");
 		System.out.println("Executing WriteBackStage....");
-		String w1 = MUXsim.MUX(Integer.toBinaryString(readData1), Integer.toBinaryString(readData2), control.getMin());
-		String w2 = MUXsim.MUX(Integer.toBinaryString(readData1), Integer.toBinaryString(readData2), control.getMax());
+		System.out.println("ReadData1 "+readData1);
+		System.out.println("ReadData2 "+readData2);
+		String w1 = MUXsim.MUX(integerConverter.toBinaryString(readData1), integerConverter.toBinaryString(readData2), control.getMin());
+		String w2 = MUXsim.MUX(integerConverter.toBinaryString(readData1), integerConverter.toBinaryString(readData2), control.getMax());
 		String out = MUXsim.MUX(w1, w2, fifteenthBit);
 		System.out.println(
 				"Wire 1 value: " + w1 + '\n' + "Wire 2 value: " + w2 + '\n' + "Output of 2 wires Value: " + out);

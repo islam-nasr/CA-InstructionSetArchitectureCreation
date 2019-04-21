@@ -102,8 +102,8 @@ public class Simulator {
 					i--;
 				}
 
-				clockcycles++;
-			}
+				
+			}clockcycles++;
 			if (pc == InstructionMemory.numberOfInstructions - 1) {
 				while (!processes.isEmpty()) {
 					System.out.println("____________________" + '\n' + "Clockcycle: " + clockcycles);
