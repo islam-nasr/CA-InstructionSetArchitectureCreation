@@ -6,10 +6,13 @@ public class DataMemory {
 
 	public static void write(int address, int value) {
 		System.out.println("!!!!!!!!!!!!!");
-		
+		if(address>61440) {
+			System.out.println("Not available Memory Location!!");
+		}
+		else {
 		maximumUsedAddress = Math.max(maximumUsedAddress, address / 2);
 		data[address / 2] = value;
-		System.out.println(maximumUsedAddress);
+		System.out.println(maximumUsedAddress);}
 	}
 
 	public static int read(int address) {
@@ -19,9 +22,9 @@ public class DataMemory {
 	public static void toPrint() {
 		String r = "";
 		for (int i = 0; i <= maximumUsedAddress; ++i)
-			// for (int i = 0; i <= data.length; i++)
-			// r += String.format("%d: %d\n", i, data[i]);
-			r += "Memory Location: " + i + " " + data[i];
+			 //for (int i = 0; i <= data.length; i++)
+			// r += String.format("%d: %d\n", i*2, data[i]);
+			r += " Memory Location: " + i*2 + " " + data[i]+'\n';
 		System.out.println(r);
 	}
 }

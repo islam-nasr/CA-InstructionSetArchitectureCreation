@@ -34,6 +34,9 @@ public class ControlUnit {
 			memToReg = 1;
 			break;
 		case "0010":
+			regDst = 1;
+			memWrite = 1;
+			break;
 		case "0011":
 		case "0100":
 		case "0101":
@@ -75,7 +78,7 @@ public class ControlUnit {
 			regDst = 1;
 			break;
 		case "1110":
-			ALUSrc=1;
+			ALUSrc = 1;
 			regDst = 1;
 			regWrite = 1;
 			break;

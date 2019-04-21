@@ -32,7 +32,11 @@ public class MemoryStage extends Stage {
 		if (control.getMemRead() == 1) {
 			dataOut = DataMemory.read(Integer.parseInt(address, 2));
 		} else if (control.getMemWrite() == 1) {
-			DataMemory.write(Integer.parseInt(address, 2), writeData);
+			System.out.println("ana fe om el memory write");
+			DataMemory.write(Integer.parseInt(address, 2)*2, writeData);
+		}
+		else {
+			System.out.println();
 		}
 		DataMemory.toPrint();
 	}

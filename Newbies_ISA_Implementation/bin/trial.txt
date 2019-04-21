@@ -1,6 +1,6 @@
 RDI $t0 -6
-RDI $t1 2
-RDI $s1 0
+RDI $t1 3
+RDI $s1 2
 SUM $s0 $s0 $s0
 SUM $s0 $s0 $s0
 SUM $s0 $s0 $s0
@@ -8,4 +8,8 @@ SUM $s0 $s0 $s0
 SUM $s0 $t0 $t0
 SLL $t1 1
 WR $t1 $t1 $s1
-RD $t2 $t1 $s1
+SUM $s2 $s2 $s2
+SUM $s2 $s2 $s2
+SUM $s2 $s2 $s2
+SUM $s2 $s2 $s2
+RD $t2 $t1 $s2
