@@ -2,6 +2,7 @@ RDI $t0 -6
 RDI $t1 3
 RDI $s1 2
 RDI $s2 5
+RDI $v0 10
 SUM $s0 $s0 $s0
 SUM $s0 $s0 $s0
 SUM $s0 $s0 $s0
@@ -14,7 +15,7 @@ SUM $s0 $s0 $s0
 SKP $zero $zero
 SUM $s0 $s0 $s0
 SLT $t2 $s0 $s2
-HOP 1
+HOPR $v0
 SUM $s0 $s0 $s0
 SUM $t3 $one $one
 SUM $t0 $zero $one

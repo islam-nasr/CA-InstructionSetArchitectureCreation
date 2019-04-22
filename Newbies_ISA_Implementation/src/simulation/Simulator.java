@@ -112,7 +112,7 @@ public class Simulator {
 
 			}
 			clockcycles++;
-			if (PC.getValue() == (InstructionMemory.numberOfInstructions - 1) * 2) {
+			if (PC.getValue() >= (InstructionMemory.numberOfInstructions - 1) * 2) {
 				while (!processes.isEmpty()) {
 					System.out.println("____________________" + '\n' + "Clockcycle: " + clockcycles);
 

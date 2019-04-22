@@ -30,11 +30,11 @@ public class InstructionDecode extends Stage {
 		System.out.println("Executing decoding....");
 		RegisterFile.toPrint();
 		String readRegister2 = instruction.substring(instruction.length() - 4, instruction.length());
-		
+
 		String readRegister1 = instruction.substring(instruction.length() - 8, instruction.length() - 4);
 		String rD = instruction.substring(instruction.length() - 12, instruction.length() - 8);
-		if(control.getOpcode().equals("1110")) {
-			readRegister1=rD;
+		if (control.getOpcode().equals("1110") || control.getOpcode().equals("1001")) {
+			readRegister1 = rD;
 		}
 		System.out.print(
 				"Register Code:" + '\n' + "RD: " + rD + " RS: " + readRegister1 + " RT: " + readRegister2 + '\n');
