@@ -57,6 +57,7 @@ public class ControlUnit {
 			PCSrc = 1;
 			break;
 		case "1010":
+			ra = 1;
 			PCSrc = 1;
 			break;
 		case "1011":

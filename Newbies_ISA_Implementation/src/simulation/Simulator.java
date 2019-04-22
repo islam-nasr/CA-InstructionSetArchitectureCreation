@@ -78,6 +78,8 @@ public class Simulator {
 					if (isEqual)
 						PC.setValue(PC.getValue() + 2);
 					int returnAddress = ((InstructionExecute) stage).getAdderResult();
+					if (cpu.getOpcode().equals("1010"))
+						RegisterFile.writeRegister(3, PC.getValue());
 					if (cpu.getPCSrc() == 1)
 						PC.setValue(returnAddress);
 					processes.remove(i);
