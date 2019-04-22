@@ -53,7 +53,10 @@ public class WriteBackStage extends Stage {
 		String finalOutput = MUXsim.MUX(out1, out2, control.getCreative());
 		writeBackValue = integerConverter.getTwosComplement(finalOutput);
 		System.out.println("Write Back Value: " + writeBackValue + '\n' + "Final Output Value: " + finalOutput);
-		RegisterFile.writeRegister(writeRegisterNumber, writeBackValue);
+		if(writeRegisterNumber==0 || writeRegisterNumber==1)
+			System.out.println("Sorry, can't write in this type of register");
+		else
+		    RegisterFile.writeRegister(writeRegisterNumber, writeBackValue);
 		RegisterFile.toPrint();
 	}
 }
