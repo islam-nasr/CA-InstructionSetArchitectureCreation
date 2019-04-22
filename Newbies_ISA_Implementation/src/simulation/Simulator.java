@@ -18,7 +18,7 @@ import stages.WriteBackStage;
 
 public class Simulator {
 	static Vector<Stage> processes = new Vector<Stage>(6);
-	static Register PC = new Register("PC", 0);
+	public static Register PC = new Register("PC", 0);
 
 	public static void main(String[] args) {
 		InstructionIntialization.initialize();
@@ -77,6 +77,9 @@ public class Simulator {
 					boolean isEqual = ((InstructionExecute) stage).isEqual();
 					if (isEqual)
 						PC.setValue(PC.getValue() + 2);
+					int returnAddress = ((InstructionExecute) stage).getAdderResult();
+					if (cpu.getPCSrc() == 1)
+						PC.setValue(returnAddress);
 					processes.remove(i);
 					// call memory stage with these stuff
 					// passing readData1 twice as it is taken twice
@@ -120,10 +123,11 @@ public class Simulator {
 						// processes.remove(i);
 						if (stage instanceof InstructionFetch) {
 							// execute the process
-							ControlUnit control = new ControlUnit();
 							String instruction = ((InstructionFetch) stage).execute(PC.getValue());
-							String opcode = instruction.substring(0, 5);
+							String opcode = instruction.substring(0, 4);
+							ControlUnit control = new ControlUnit();
 							control.setControlSignals(opcode);
+							control.toPrint();
 							processes.remove(i);
 							processes.add(i, new InstructionDecode(instruction, control));
 						}
@@ -134,11 +138,11 @@ public class Simulator {
 							ControlUnit cpu = ((InstructionDecode) stage).getControl();
 							int readData1 = ((InstructionDecode) stage).getReadData1();
 							int readData2 = ((InstructionDecode) stage).getReadData2();
+							int writeRegisterNumber = ((InstructionDecode) stage).getWriteRegisterNumber();
 							String signExtend = ((InstructionDecode) stage).getSignExtend();
-							int writeRegister = ((InstructionDecode) stage).getWriteRegisterNumber();
 							processes.remove(i);
 							processes.add(i,
-									new InstructionExecute(cpu, readData1, readData2, signExtend, writeRegister));
+									new InstructionExecute(cpu, readData1, readData2, signExtend, writeRegisterNumber));
 						}
 
 						else if (stage instanceof InstructionExecute) {
@@ -150,6 +154,12 @@ public class Simulator {
 							int readData1 = ((InstructionExecute) stage).getReadData1();
 							int readData2 = ((InstructionExecute) stage).getReadData2();
 							int fifteenthBit = ((InstructionExecute) stage).getLastBit();
+							boolean isEqual = ((InstructionExecute) stage).isEqual();
+							if (isEqual)
+								PC.setValue(PC.getValue() + 2);
+							int returnAddress = ((InstructionExecute) stage).getAdderResult();
+							if (cpu.getPCSrc() == 1)
+								PC.setValue(returnAddress);
 							processes.remove(i);
 							// call memory stage with these stuff
 							// passing readData1 twice as it is taken twice
@@ -179,6 +189,7 @@ public class Simulator {
 							processes.remove(i);
 							i--;
 						}
+
 					}
 					clockcycles++;
 				}

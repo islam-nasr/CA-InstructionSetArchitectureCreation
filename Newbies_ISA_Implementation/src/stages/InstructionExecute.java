@@ -17,6 +17,7 @@ public class InstructionExecute extends Stage {
 	private int readData2;
 	private String signExtend;
 	private int writeRegisterNumber;
+	private int adderResult;
 
 	public InstructionExecute(ControlUnit control, int readData1, int readData2, String signExtend,
 			int writeRegisterNumber) {
@@ -66,6 +67,7 @@ public class InstructionExecute extends Stage {
 		this.result = MUXsim.MUX(ALUresult, signExtend, control.getLoadi());
 		System.out.println("Output from Execution Stage: " + result + " int value is: "
 				+ integerConverter.getTwosComplement(result));
+		adderResult = ALU.adder(signExtend, readData1, control);
 	}
 
 	public String getResult() {
@@ -96,4 +98,7 @@ public class InstructionExecute extends Stage {
 		return isEqual && (control.getSkip() == 1);
 	}
 
+	public int getAdderResult() {
+		return adderResult;
+	}
 }

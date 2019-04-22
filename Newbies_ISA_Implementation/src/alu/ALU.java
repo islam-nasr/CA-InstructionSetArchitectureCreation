@@ -1,5 +1,8 @@
 package alu;
 
+import memory.ControlUnit;
+import simulation.Simulator;
+
 public class ALU {
 	int result;
 	boolean isALU = true;
@@ -38,7 +41,7 @@ public class ALU {
 			result = ~value1;
 			break;// not
 		case "101":
-			System.out.println("CASE SHIFT:" +"Value1: "+value1+'\n'+"Value2:"+value2);
+			System.out.println("CASE SHIFT:" + "Value1: " + value1 + '\n' + "Value2:" + value2);
 			result = (value1 << value2);
 			break;// SLL
 		default:
@@ -51,6 +54,15 @@ public class ALU {
 			lastbit = 1;
 		}
 		return result;
+
+	}
+
+	public static int adder(String signExtend, int returnAddress, ControlUnit control) {
+		signExtend = signExtend.substring(1);
+		signExtend = signExtend + "0";
+		String ra = integerConverter.toBinaryString(returnAddress);
+		String adderInput = MUXsim.MUX(ra, signExtend, control.getRa());
+		return (Integer.parseInt(adderInput, 2) + Simulator.PC.getValue());
 
 	}
 
