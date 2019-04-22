@@ -7,11 +7,18 @@ WAIT
 WAIT
 WAIT
 WAIT
+SUM $a1 $s1 $v0
+DIFF $a2 $v0 $s2
+AND $t2 $t1 $one
+OR $sp $s1 $one
+NOT $s0 $one
+SLL $s1 5
 WR $t1 $t1 $s1
 WAIT
 WAIT
 WAIT
 WAIT
+RD $a0 $t1 $zero
 SKP $zero $zero
 WAIT
 SLT $t2 $s0 $s2
