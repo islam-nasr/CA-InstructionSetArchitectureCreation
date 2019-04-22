@@ -28,7 +28,7 @@ public class InstructionFetch extends Stage {
 	public String execute(int i) {
 		System.out.println("==================================================================");
 		System.out.println("Executing fetching........");
-		String instruction = Integer.toBinaryString(InstructionMemory.getInstruction(i * 2));
+		String instruction = Integer.toBinaryString(InstructionMemory.getInstruction(i));
 		while (instruction.length() < 16) {
 			instruction = "0" + instruction;
 		}
@@ -86,7 +86,8 @@ public class InstructionFetch extends Stage {
 					int rs = regStrings.get(rsName) << 8;
 					instruction = function | rs;
 				} else {
-					if (bitStrings.get(parts[0]) == Integer.parseInt("1111", 2)||bitStrings.get(parts[0]) == Integer.parseInt("0111", 2)) {
+					if (bitStrings.get(parts[0]) == Integer.parseInt("1111", 2)
+							|| bitStrings.get(parts[0]) == Integer.parseInt("0111", 2)) {
 						String rsName = parts[1];
 						int rs = regStrings.get(rsName) << 8;
 
@@ -125,8 +126,8 @@ public class InstructionFetch extends Stage {
 					System.out.println("EL MOSHKELA HENA " + integerConverter.toBinaryString(immediate));
 					instruction = Integer.parseInt(integerConverter.artificialOR(function, rdNumber, immediateTrimmed),
 							2);
-					System.out.println(
-							"ARTIFICIAL ORRING: " + integerConverter.artificialOR(function, rdNumber, immediateTrimmed));
+					System.out.println("ARTIFICIAL ORRING: "
+							+ integerConverter.artificialOR(function, rdNumber, immediateTrimmed));
 				}
 			}
 		}

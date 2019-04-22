@@ -6,7 +6,10 @@ public class RegisterFile {
 	public RegisterFile() {
 		registers = new Register[16];
 		for (int i = 0; i < registers.length; i++) {
-			registers[i] = new Register(0);
+			if (i == 1)
+				registers[i] = new Register(1);
+			else
+				registers[i] = new Register(0);
 		}
 		registers[0].setName("$zero");
 		registers[1].setName("$one");
@@ -38,7 +41,8 @@ public class RegisterFile {
 	/**
 	 * sets the registers to given register array
 	 * 
-	 * @param registers new array containing the registers
+	 * @param registers
+	 *            new array containing the registers
 	 */
 	@SuppressWarnings("static-access")
 	public void setRegisters(Register[] registers) {
@@ -48,7 +52,8 @@ public class RegisterFile {
 	/**
 	 * reads complete register from the registers array
 	 * 
-	 * @param index the register number to return
+	 * @param index
+	 *            the register number to return
 	 * @return the register
 	 */
 	public Register readRegister(int index) {
@@ -58,7 +63,8 @@ public class RegisterFile {
 	/**
 	 * reads a value from a register
 	 * 
-	 * @param index the register number to read that value at
+	 * @param index
+	 *            the register number to read that value at
 	 * @return the value in the register
 	 */
 	public static int readRegisterValue(int index) {
@@ -68,8 +74,10 @@ public class RegisterFile {
 	/**
 	 * writes a value into a register
 	 * 
-	 * @param index the register number to write that value at
-	 * @param value the value being written in the register
+	 * @param index
+	 *            the register number to write that value at
+	 * @param value
+	 *            the value being written in the register
 	 */
 	public static void writeRegister(int index, int value) {
 		registers[index].setValue(value);

@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import memory.ControlUnit;
 import memory.InstructionMemory;
+import memory.Register;
 import memory.RegisterFile;
 import memory.RegisterFileInitialization;
 import stages.InstructionDecode;
@@ -17,11 +18,12 @@ import stages.WriteBackStage;
 
 public class Simulator {
 	static Vector<Stage> processes = new Vector<Stage>(6);
+	static Register PC = new Register("PC", 0);
 
 	public static void main(String[] args) {
 		InstructionIntialization.initialize();
 		RegisterFileInitialization.initialize();
-		RegisterFile registerFile = new RegisterFile();
+		new RegisterFile();
 		try {
 			InstructionFetch.readInstructions("src/trial.txt");
 		} catch (IOException e) {
@@ -29,7 +31,7 @@ public class Simulator {
 		}
 
 		int clockcycles = 1;
-		for (int pc = 0; pc < InstructionMemory.numberOfInstructions; pc++) {
+		while (PC.getValue() < InstructionMemory.numberOfInstructions * 2) {
 			System.out.println("Clockcycle: " + clockcycles + '\n' + "____________________");
 			Stage s = new InstructionFetch();
 			processes.add(s);
@@ -41,7 +43,7 @@ public class Simulator {
 				// processes.remove(i);
 				if (stage instanceof InstructionFetch) {
 					// execute the process
-					String instruction = ((InstructionFetch) stage).execute(pc);
+					String instruction = ((InstructionFetch) stage).execute(PC.getValue());
 					String opcode = instruction.substring(0, 4);
 					ControlUnit control = new ControlUnit();
 					control.setControlSignals(opcode);
@@ -72,6 +74,9 @@ public class Simulator {
 					int readData1 = ((InstructionExecute) stage).getReadData1();
 					int readData2 = ((InstructionExecute) stage).getReadData2();
 					int fifteenthBit = ((InstructionExecute) stage).getLastBit();
+					boolean isEqual = ((InstructionExecute) stage).isEqual();
+					if (isEqual)
+						PC.setValue(PC.getValue() + 2);
 					processes.remove(i);
 					// call memory stage with these stuff
 					// passing readData1 twice as it is taken twice
@@ -102,9 +107,9 @@ public class Simulator {
 					i--;
 				}
 
-				
-			}clockcycles++;
-			if (pc == InstructionMemory.numberOfInstructions - 1) {
+			}
+			clockcycles++;
+			if (PC.getValue() == (InstructionMemory.numberOfInstructions - 1) * 2) {
 				while (!processes.isEmpty()) {
 					System.out.println("____________________" + '\n' + "Clockcycle: " + clockcycles);
 
@@ -116,7 +121,7 @@ public class Simulator {
 						if (stage instanceof InstructionFetch) {
 							// execute the process
 							ControlUnit control = new ControlUnit();
-							String instruction = ((InstructionFetch) stage).execute(pc);
+							String instruction = ((InstructionFetch) stage).execute(PC.getValue());
 							String opcode = instruction.substring(0, 5);
 							control.setControlSignals(opcode);
 							processes.remove(i);
@@ -178,6 +183,7 @@ public class Simulator {
 					clockcycles++;
 				}
 			}
+			PC.setValue(PC.getValue() + 2);
 			System.out
 					.println("______________________________________________________________________________________");
 		}

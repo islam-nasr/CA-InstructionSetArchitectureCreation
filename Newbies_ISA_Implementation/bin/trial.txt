@@ -11,4 +11,7 @@ SUM $s0 $s0 $s0
 SUM $s0 $s0 $s0
 SUM $s0 $s0 $s0
 SUM $s0 $s0 $s0
+SKP $zero $zero
+SUM $s0 $s0 $s0
 SLT $t2 $s0 $s2
+SUM $t0 $one $one

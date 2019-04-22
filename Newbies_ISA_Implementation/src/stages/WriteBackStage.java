@@ -56,5 +56,4 @@ public class WriteBackStage extends Stage {
 		RegisterFile.writeRegister(writeRegisterNumber, writeBackValue);
 		RegisterFile.toPrint();
 	}
-
 }

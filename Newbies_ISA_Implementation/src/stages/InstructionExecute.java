@@ -38,8 +38,8 @@ public class InstructionExecute extends Stage {
 
 		String first = MUXsim.MUX(integerConverter.toBinaryString(readData2), signExtend, ALUSrc);
 		String second = MUXsim.MUX(first, "0000000000000000", not);
-		System.out.println("First Wire:"+first+" "+integerConverter.getTwosComplement(first));
-		System.out.println("Second Wire:"+second+" "+integerConverter.getTwosComplement(second));
+		System.out.println("First Wire:" + first + " " + integerConverter.getTwosComplement(first));
+		System.out.println("Second Wire:" + second + " " + integerConverter.getTwosComplement(second));
 
 		int secondint;
 		ALU alu = new ALU();
@@ -49,16 +49,17 @@ public class InstructionExecute extends Stage {
 			secondint = integerConverter.getTwosComplement(second);
 		else
 			secondint = Integer.parseInt(second, 2);
-		System.out.println("ReadData1: "+readData1);
-		System.out.println("ReadData2: "+readData2);
-		System.out.println("secondint: "+secondint);
+		System.out.println("ReadData1: " + readData1);
+		System.out.println("ReadData2: " + readData2);
+		System.out.println("secondint: " + secondint);
 
 		alu.operate(ALUControl, readData1, secondint);
 		System.out.println(
 				"First input to ALU: " + readData1 + '\n' + "Second input to ALU: " + Integer.parseInt(second, 2));
 		lastBit = alu.lastBit();
+		isEqual = alu.isEqual();
 		String ALUresult = integerConverter.toBinaryString(alu.getResult());
-		System.out.println("ALURESULT STRING:"+ALUresult);
+		System.out.println("ALURESULT STRING:" + ALUresult);
 		System.out.println();
 		System.out.println("Last bit: " + alu.lastBit());
 		System.out.println("Result from ALU: " + integerConverter.getTwosComplement(ALUresult));
@@ -89,6 +90,10 @@ public class InstructionExecute extends Stage {
 
 	public int getLastBit() {
 		return lastBit;
+	}
+
+	public boolean isEqual() {
+		return isEqual && (control.getSkip() == 1);
 	}
 
 }
