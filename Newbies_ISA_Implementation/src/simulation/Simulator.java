@@ -75,6 +75,7 @@ public class Simulator {
 					int readData2 = ((InstructionExecute) stage).getReadData2();
 					int fifteenthBit = ((InstructionExecute) stage).getLastBit();
 					boolean isEqual = ((InstructionExecute) stage).isEqual();
+					System.out.println("PC IN EXECUTION: " + PC.getValue());
 					if (isEqual)
 						PC.setValue(PC.getValue() + 2);
 					int returnAddress = ((InstructionExecute) stage).getAdderResult();

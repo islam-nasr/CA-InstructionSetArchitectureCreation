@@ -15,7 +15,7 @@ SUM $s0 $s0 $s0
 SKP $zero $zero
 SUM $s0 $s0 $s0
 SLT $t2 $s0 $s2
-HAT 10
-SUM $s0 $s0 $s0
+HAT 1
 SUM $t3 $one $one
-SUM $t0 $zero $one
+HOP 2
+HOPR $ra
