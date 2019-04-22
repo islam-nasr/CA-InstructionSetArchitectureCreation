@@ -1,6 +1,13 @@
 package alu;
 
 public class integerConverter {
+	/***
+	 * gets the two's complement int of a given binary string
+	 * 
+	 * @param binaryInt
+	 *            binary string
+	 * @return int that's in two's compelement either negative or positive
+	 */
 	public static int getTwosComplement(String binaryInt) {
 		// Check if the number is negative.
 		// We know it's negative if it starts with a 1
@@ -21,6 +28,18 @@ public class integerConverter {
 		}
 	}
 
+	/***
+	 * Manually OR 3 strings together.
+	 * 
+	 * @param func
+	 *            first input
+	 * @param rD
+	 *            2nd input
+	 * @param imm
+	 *            3rd input
+	 * @return Returning a 16 bit String
+	 */
+
 	public static String artificialOR(int func, int rD, String imm) {
 		String substring = Integer.toBinaryString(rD | func);
 		while (substring.length() != 16) {
@@ -38,6 +57,14 @@ public class integerConverter {
 		return result;
 	}
 
+	/***
+	 * gets the two's complement string of a given int
+	 * 
+	 * @param number
+	 *            a positive or negative number
+	 * @return 16 bit string that represents the two's complement binary of the
+	 *         input
+	 */
 	public static String toBinaryString(int number) {
 		String result = "";
 		int origin = Math.abs(number);

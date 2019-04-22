@@ -155,21 +155,22 @@ public class ControlUnit {
 
 	public void toPrint() {
 		System.out.println("Control Unit being printed!");
-		System.out.println("RegDst : " + regDst);
-		System.out.println("RegWrite : " + regWrite);
-		System.out.println("RA : " + ra);
-		System.out.println("PCSrc : " + PCSrc);
-		System.out.println("MemToReg : " + memToReg);
-		System.out.println("MemToRead : " + memRead);
-		System.out.println("MemWrite : " + memWrite);
-		System.out.println("Not : " + not);
-		System.out.println("ALUSrc : " + ALUSrc);
-		System.out.println("Skip : " + skip);
-		System.out.println("Max : " + max);
-		System.out.println("Min : " + min);
-		System.out.println("SetLessThan : " + setll);
-		System.out.println("Creative : " + creative);
-		System.out.println("Loadi : " + Loadi);
+		System.out.println("RegDst -------> " + regDst);
+		System.out.println("RegWrite -----> " + regWrite);
+		System.out.println("RA -----------> " + ra);
+		System.out.println("PCSrc --------> " + PCSrc);
+		System.out.println("MemToReg -----> " + memToReg);
+		System.out.println("MemToRead ----> " + memRead);
+		System.out.println("MemWrite -----> " + memWrite);
+		System.out.println("Not ----------> " + not);
+		System.out.println("ALUSrc -------> " + ALUSrc);
+		System.out.println("Skip ---------> " + skip);
+		System.out.println("Max ----------> " + max);
+		System.out.println("Min ----------> " + min);
+		System.out.println("SetLessThan --> " + setll);
+		System.out.println("Creative -----> " + creative);
+		System.out.println("Loadi --------> " + Loadi);
+		System.out.println("==================================================================");
 	}
 
 }

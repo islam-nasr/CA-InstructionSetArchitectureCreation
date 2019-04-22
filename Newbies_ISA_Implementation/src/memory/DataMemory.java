@@ -18,10 +18,8 @@ public class DataMemory {
 	}
 
 	public static void toPrint() {
-		String r = "";
+		String r = "Data Memory Being Printed: " + "\n";
 		for (int i = 0; i <= maximumUsedAddress; ++i)
-			// for (int i = 0; i <= data.length; i++)
-			// r += String.format("%d: %d\n", i*2, data[i]);
 			r += "Memory Location: " + i * 2 + "       Data: " + data[i] + '\n';
 		System.out.println(r);
 	}

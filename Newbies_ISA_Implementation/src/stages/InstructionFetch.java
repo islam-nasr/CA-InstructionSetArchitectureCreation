@@ -17,16 +17,7 @@ public class InstructionFetch extends Stage {
 		super();
 	}
 
-	/***
-	 * takes i and returns the element in position i in instruction memory
-	 * 
-	 * @param i
-	 *            position to access now
-	 * @return String representing the instruction
-	 **
-	 */
 	public String execute(int i) {
-		System.out.println("==================================================================");
 		System.out.println("Executing fetching........");
 		String instruction = Integer.toBinaryString(InstructionMemory.getInstruction(i));
 		while (instruction.length() < 16) {
@@ -35,10 +26,7 @@ public class InstructionFetch extends Stage {
 		inst = instruction;
 		this.toPrint();
 		return instruction;
-	}
 
-	public void execute() {
-		System.out.println("Executing fetching........");
 	}
 
 	/***
@@ -74,8 +62,10 @@ public class InstructionFetch extends Stage {
 		HashMap<String, Integer> bitStrings = InstructionIntialization.bitStrings;
 		HashMap<String, String> StringType = InstructionIntialization.StringType;
 		HashMap<String, Integer> regStrings = RegisterFileInitialization.regStrings;
-
 		int instruction = 0;
+		if (line.equals("WAIT")) {
+			parts[0] = "0011000000000000";
+		}
 		if (parts[0].charAt(0) == '1' || parts[0].charAt(0) == '0') {
 			instruction = Integer.parseInt(parts[0], 2);
 		} else {
@@ -123,11 +113,8 @@ public class InstructionFetch extends Stage {
 					String immediateTrimmed = integerConverter.toBinaryString(immediate).substring(8);
 					// updating the immediate after trimming the first 8 bits
 					immediate = (byte) integerConverter.getTwosComplement(immediateTrimmed);
-					System.out.println("EL MOSHKELA HENA " + integerConverter.toBinaryString(immediate));
 					instruction = Integer.parseInt(integerConverter.artificialOR(function, rdNumber, immediateTrimmed),
 							2);
-					System.out.println("ARTIFICIAL ORRING: "
-							+ integerConverter.artificialOR(function, rdNumber, immediateTrimmed));
 				}
 			}
 		}

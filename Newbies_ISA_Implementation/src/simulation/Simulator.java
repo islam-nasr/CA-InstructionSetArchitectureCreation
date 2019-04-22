@@ -27,12 +27,12 @@ public class Simulator {
 		try {
 			InstructionFetch.readInstructions("src/trial.txt");
 		} catch (IOException e) {
-			System.out.println("mesh la2y om el file");
+			System.out.println("Feen el file?");
 		}
 
 		int clockcycles = 1;
 		while (PC.getValue() < InstructionMemory.numberOfInstructions * 2) {
-			System.out.println("Clockcycle: " + clockcycles + '\n' + "____________________");
+			System.out.println("Clockcycle: " + clockcycles + '\n' + "_____________________________________ " + '\n');
 			Stage s = new InstructionFetch();
 			processes.add(s);
 			// for loop over all current processes
@@ -75,7 +75,6 @@ public class Simulator {
 					int readData2 = ((InstructionExecute) stage).getReadData2();
 					int fifteenthBit = ((InstructionExecute) stage).getLastBit();
 					boolean isEqual = ((InstructionExecute) stage).isEqual();
-					System.out.println("PC IN EXECUTION: " + PC.getValue());
 					if (isEqual)
 						PC.setValue(PC.getValue() + 2);
 					int returnAddress = ((InstructionExecute) stage).getAdderResult();
@@ -198,8 +197,6 @@ public class Simulator {
 				}
 			}
 			PC.setValue(PC.getValue() + 2);
-			System.out
-					.println("______________________________________________________________________________________");
 		}
 	}
 }

@@ -15,10 +15,6 @@ public class InstructionDecode extends Stage {
 	String instruction;
 	ControlUnit control;
 
-	// public InstructionDecode() {
-	// super();
-	// }
-
 	public InstructionDecode(String instruction, ControlUnit control) {
 		super();
 		this.instruction = instruction;
@@ -26,7 +22,6 @@ public class InstructionDecode extends Stage {
 	}
 
 	public void execute() {
-		System.out.println("==================================================================");
 		System.out.println("Executing decoding....");
 		RegisterFile.toPrint();
 		String readRegister2 = instruction.substring(instruction.length() - 4, instruction.length());
@@ -37,7 +32,7 @@ public class InstructionDecode extends Stage {
 			readRegister1 = rD;
 		}
 		System.out.print(
-				"Register Code:" + '\n' + "RD: " + rD + " RS: " + readRegister1 + " RT: " + readRegister2 + '\n');
+				"Register Codes:" + '\n' + "RD: " + rD + " RS: " + readRegister1 + " RT: " + readRegister2 + '\n');
 		String writeRegister = MUXsim.MUX(readRegister2, rD, control.getRegDst());
 		HashMap<String, Integer> positionStrings = RegisterFileInitialization.positionStrings;
 		int registerNumber1 = positionStrings.get(readRegister1).intValue();
@@ -57,6 +52,7 @@ public class InstructionDecode extends Stage {
 				signExtend = "1" + signExtend;
 		}
 		this.toPrint();
+		System.out.println("==================================================================");
 
 	}
 
@@ -81,12 +77,8 @@ public class InstructionDecode extends Stage {
 	}
 
 	public void toPrint() {
-		// TODO Auto-generated method stub
-		System.out.print("Data output:" + '\n' + "ReadData1: " + readData1 + " ReadData2: " + readData2
+		System.out.print("Data output at this stage: " + '\n' + "ReadData1: " + readData1 + " ReadData2: " + readData2
 				+ " Sign Extend: " + signExtend + " WriteRegister: " + writeRegisterNumber + '\n');
 	}
-	/*
-	 * public void execute() { System.out.println("Executing decoding......"); }
-	 */
 
 }

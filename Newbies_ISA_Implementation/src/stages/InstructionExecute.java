@@ -30,7 +30,6 @@ public class InstructionExecute extends Stage {
 	}
 
 	public void execute() {
-		System.out.println("==================================================================");
 		System.out.println("Executing executing....");
 		int ALUSrc = control.getALUSrc();
 		int not = control.getNot();
@@ -52,7 +51,7 @@ public class InstructionExecute extends Stage {
 			secondint = Integer.parseInt(second, 2);
 		System.out.println("ReadData1: " + readData1);
 		System.out.println("ReadData2: " + readData2);
-		System.out.println("secondint: " + secondint);
+		System.out.println("SecondInt: " + secondint);
 
 		alu.operate(ALUControl, readData1, secondint);
 		System.out.println(
@@ -60,14 +59,15 @@ public class InstructionExecute extends Stage {
 		lastBit = alu.lastBit();
 		isEqual = alu.isEqual();
 		String ALUresult = integerConverter.toBinaryString(alu.getResult());
-		System.out.println("ALURESULT STRING:" + ALUresult);
-		System.out.println();
+		System.out.println("ALURESULT STRING: " + ALUresult);
 		System.out.println("Last bit: " + alu.lastBit());
 		System.out.println("Result from ALU: " + integerConverter.getTwosComplement(ALUresult));
 		this.result = MUXsim.MUX(ALUresult, signExtend, control.getLoadi());
 		System.out.println("Output from Execution Stage: " + result + " int value is: "
 				+ integerConverter.getTwosComplement(result));
 		adderResult = ALU.adder(signExtend, readData1, control);
+		System.out.println("==================================================================");
+
 	}
 
 	public String getResult() {

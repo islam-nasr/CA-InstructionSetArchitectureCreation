@@ -27,7 +27,6 @@ public class MemoryStage extends Stage {
 	}
 
 	public void execute() {
-		System.out.println("==================================================================");
 		System.out.println("Executing memory....");
 		if (control.getMemRead() == 1) {
 			dataOut = DataMemory.read(Integer.parseInt(address, 2) * 2);
@@ -37,6 +36,7 @@ public class MemoryStage extends Stage {
 			System.out.println();
 		}
 		DataMemory.toPrint();
+		System.out.println("==================================================================");
 	}
 
 	public int getWriteRegisterNumber() {

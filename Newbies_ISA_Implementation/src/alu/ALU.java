@@ -10,6 +10,7 @@ public class ALU {
 	int lastbit = 0;
 
 	/***
+	 * Tells the ALU to operate, setting the instance variables of this ALU
 	 * 
 	 * @param Opcode
 	 *            value entering the ALU to determine which operator to use
@@ -57,6 +58,17 @@ public class ALU {
 
 	}
 
+	/***
+	 * Represents the adder that's at the top right corner of the datapath
+	 * 
+	 * @param signExtend
+	 *            the first value entering, which is the signExtend
+	 * @param returnAddress
+	 *            the second input which is readData1 from the data path
+	 * @param control
+	 *            the control unit to use some of the signals of it
+	 * @return result of the addition
+	 */
 	public static int adder(String signExtend, int returnAddress, ControlUnit control) {
 		signExtend = signExtend.substring(1);
 		signExtend = signExtend + "0";

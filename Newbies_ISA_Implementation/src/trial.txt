@@ -3,17 +3,17 @@ RDI $t1 3
 RDI $s1 2
 RDI $s2 5
 RDI $v0 10
-SUM $s0 $s0 $s0
-SUM $s0 $s0 $s0
-SUM $s0 $s0 $s0
-SUM $s0 $s0 $s0
+WAIT
+WAIT
+WAIT
+WAIT
 WR $t1 $t1 $s1
-SUM $s0 $s0 $s0
-SUM $s0 $s0 $s0
-SUM $s0 $s0 $s0
-SUM $s0 $s0 $s0
+WAIT
+WAIT
+WAIT
+WAIT
 SKP $zero $zero
-SUM $s0 $s0 $s0
+WAIT
 SLT $t2 $s0 $s2
 HAT 1
 SUM $t3 $one $one

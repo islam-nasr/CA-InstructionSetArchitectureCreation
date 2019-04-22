@@ -31,8 +31,12 @@ public class Register {
 
 	@Override
 	public String toString() {
-
-		return (this.name + " : " + this.value);
+		if (this.name == "$zero")
+			return (this.name + " : " + this.value);
+		else if (this.name == "$one")
+			return (this.name + "  : " + this.value);
+		else
+			return (this.name + "   : " + this.value);
 	}
 
 }

@@ -30,26 +30,6 @@ public class RegisterFile {
 	}
 
 	/**
-	 * getting the complete registers in the system
-	 * 
-	 * @return array of registers
-	 */
-	public Register[] getRegisters() {
-		return registers;
-	}
-
-	/**
-	 * sets the registers to given register array
-	 * 
-	 * @param registers
-	 *            new array containing the registers
-	 */
-	@SuppressWarnings("static-access")
-	public void setRegisters(Register[] registers) {
-		this.registers = registers;
-	}
-
-	/**
 	 * reads complete register from the registers array
 	 * 
 	 * @param index
@@ -83,17 +63,9 @@ public class RegisterFile {
 		registers[index].setValue(value);
 	}
 
-	@Override
-	public String toString() {
-		String r = "";
-		for (int i = 0; i < 16; i++)
-			r += registers[i].toString() + "\n";
-		return r;
-	}
-
 	public static void toPrint() {
 		// TODO Auto-generated method stub
-		String r = "";
+		String r = "Register File Being Printed: " + "\n";
 		for (int i = 0; i < 16; i++)
 			r += registers[i].toString() + "\n";
 		System.out.println(r);
